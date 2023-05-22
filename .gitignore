@@ -1,0 +1,5 @@
+.env
+pdf_files
+*.parquet
+index
+.idea
