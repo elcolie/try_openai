@@ -1,4 +1,4 @@
-"""ChatGPT read the PDF files and answer to the questions."""
+"""Read the PDF files and answer to the questions."""
 from dotenv import load_dotenv
 import os
 # import openai

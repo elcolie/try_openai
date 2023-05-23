@@ -8,45 +8,295 @@ aiohttp==3.8.4
     # via openai
 aiosignal==1.3.1
     # via aiohttp
+ansiwrap==0.8.4
+    # via papermill
+appnope==0.1.3
+    # via
+    #   ipykernel
+    #   ipython
+asttokens==2.2.1
+    # via stack-data
 async-timeout==4.0.2
     # via aiohttp
 attrs==23.1.0
-    # via aiohttp
+    # via
+    #   aiohttp
+    #   jsonschema
+autopep8==2.0.2
+    # via ploomber
+backcall==0.2.0
+    # via ipython
+backoff==2.2.1
+    # via posthog
+beautifulsoup4==4.12.2
+    # via nbconvert
+bleach==6.0.0
+    # via nbconvert
 certifi==2023.5.7
     # via requests
 charset-normalizer==3.1.0
     # via
     #   aiohttp
     #   requests
+click==8.1.3
+    # via
+    #   papermill
+    #   ploomber
+    #   ploomber-core
+    #   ploomber-engine
+colorama==0.4.6
+    # via debuglater
+comm==0.1.3
+    # via ipykernel
+debuglater==1.4.4
+    # via ploomber-engine
+debugpy==1.6.7
+    # via ipykernel
+decorator==5.1.1
+    # via
+    #   ipdb
+    #   ipython
+defusedxml==0.7.1
+    # via nbconvert
+entrypoints==0.4
+    # via papermill
+executing==1.2.0
+    # via stack-data
+fastjsonschema==2.17.1
+    # via nbformat
 frozenlist==1.3.3
     # via
     #   aiohttp
     #   aiosignal
+humanize==4.6.0
+    # via ploomber
 idna==3.4
     # via
     #   requests
     #   yarl
+ipdb==0.13.13
+    # via ploomber
+ipykernel==6.23.1
+    # via ploomber
+ipython==8.13.2
+    # via
+    #   ipdb
+    #   ipykernel
+    #   ploomber
+    #   ploomber-engine
+jedi==0.18.2
+    # via ipython
+jinja2==3.1.2
+    # via
+    #   nbconvert
+    #   ploomber
+    #   ploomber-scaffold
+jsonschema==4.17.3
+    # via nbformat
+jupyter-client==8.2.0
+    # via
+    #   ipykernel
+    #   nbclient
+    #   ploomber
+jupyter-core==5.3.0
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+jupyterlab-pygments==0.2.2
+    # via nbconvert
+jupytext==1.14.5
+    # via ploomber
+markdown-it-py==2.2.0
+    # via
+    #   jupytext
+    #   mdit-py-plugins
+markupsafe==2.1.2
+    # via
+    #   jinja2
+    #   nbconvert
+matplotlib-inline==0.1.6
+    # via
+    #   ipykernel
+    #   ipython
+mdit-py-plugins==0.3.5
+    # via jupytext
+mdurl==0.1.2
+    # via markdown-it-py
+mistune==2.0.5
+    # via
+    #   nbconvert
+    #   ploomber
+monotonic==1.6
+    # via posthog
 multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
+nbclient==0.7.4
+    # via
+    #   nbconvert
+    #   papermill
+    #   ploomber-engine
+nbconvert==7.4.0
+    # via ploomber
+nbformat==5.8.0
+    # via
+    #   jupytext
+    #   nbclient
+    #   nbconvert
+    #   papermill
+    #   ploomber
+    #   ploomber-engine
+nest-asyncio==1.5.6
+    # via ipykernel
+networkx==3.1
+    # via ploomber
 openai==0.27.7
     # via -r requirements.in
+packaging==23.1
+    # via
+    #   ipykernel
+    #   nbconvert
+pandocfilters==1.5.0
+    # via nbconvert
+papermill==2.4.0
+    # via ploomber
+parso==0.8.3
+    # via
+    #   jedi
+    #   ploomber
+    #   ploomber-engine
+pexpect==4.8.0
+    # via ipython
+pickleshare==0.7.5
+    # via ipython
+platformdirs==3.5.1
+    # via jupyter-core
+ploomber==0.22.3
+    # via -r requirements.in
+ploomber-core==0.2.10
+    # via
+    #   ploomber
+    #   ploomber-engine
+ploomber-engine==0.0.28
+    # via ploomber
+ploomber-scaffold==0.3.1
+    # via ploomber
+posthog==3.0.1
+    # via
+    #   ploomber
+    #   ploomber-core
+prompt-toolkit==3.0.38
+    # via ipython
+psutil==5.9.5
+    # via ipykernel
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.2
+    # via stack-data
+pycodestyle==2.10.0
+    # via autopep8
+pydantic==1.10.7
+    # via ploomber
+pyflakes==3.0.1
+    # via ploomber
+pygments==2.15.1
+    # via
+    #   ipython
+    #   nbconvert
+    #   ploomber
 pypdf==3.9.0
     # via -r requirements.in
+pyrsistent==0.19.3
+    # via jsonschema
+python-dateutil==2.8.2
+    # via
+    #   jupyter-client
+    #   posthog
 python-dotenv==1.0.0
     # via -r requirements.in
+pyyaml==6.0
+    # via
+    #   jupytext
+    #   papermill
+    #   ploomber
+    #   ploomber-core
+pyzmq==25.0.2
+    # via
+    #   ipykernel
+    #   jupyter-client
 regex==2023.5.5
     # via tiktoken
 requests==2.30.0
     # via
     #   openai
+    #   papermill
+    #   posthog
     #   tiktoken
+six==1.16.0
+    # via
+    #   bleach
+    #   posthog
+    #   python-dateutil
+soupsieve==2.4.1
+    # via beautifulsoup4
+sqlalchemy==2.0.15
+    # via ploomber
+sqlparse==0.4.4
+    # via ploomber
+stack-data==0.6.2
+    # via ipython
+tabulate==0.9.0
+    # via ploomber
+tenacity==8.2.2
+    # via papermill
+textwrap3==0.9.2
+    # via ansiwrap
 tiktoken==0.4.0
     # via -r requirements.in
+tinycss2==1.2.1
+    # via nbconvert
+toml==0.10.2
+    # via jupytext
+tomli==2.0.1
+    # via
+    #   autopep8
+    #   ipdb
+tornado==6.3.2
+    # via
+    #   ipykernel
+    #   jupyter-client
 tqdm==4.65.0
-    # via openai
+    # via
+    #   openai
+    #   papermill
+    #   ploomber
+    #   ploomber-engine
+traitlets==5.9.0
+    # via
+    #   comm
+    #   ipykernel
+    #   ipython
+    #   jupyter-client
+    #   jupyter-core
+    #   matplotlib-inline
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+typing-extensions==4.5.0
+    # via
+    #   pydantic
+    #   sqlalchemy
 urllib3==2.0.2
     # via requests
+wcwidth==0.2.6
+    # via prompt-toolkit
+webencodings==0.5.1
+    # via
+    #   bleach
+    #   tinycss2
 yarl==1.9.2
     # via aiohttp
