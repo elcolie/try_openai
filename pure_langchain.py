@@ -1,9 +1,7 @@
 """Read the PDF files and answer to the questions."""
-from dotenv import load_dotenv
 import os
-# import openai
-# from pprint import pprint
 
+from dotenv import load_dotenv
 from langchain import OpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.document_loaders import PyPDFLoader
@@ -12,11 +10,8 @@ from langchain.memory import ConversationBufferMemory
 from langchain.vectorstores import Chroma
 
 load_dotenv()
-
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-#pprint(openai.Model.list()) gpt-3.5-turbo
-
 pdf_path: str = "pdf_files"
+
 
 def main() -> None:
     """Run main function."""
@@ -48,5 +43,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
