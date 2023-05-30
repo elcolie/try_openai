@@ -3,3 +3,5 @@ pdf_files
 *.parquet
 index
 .idea
+sd-pokemon-model
+*.jsonl
