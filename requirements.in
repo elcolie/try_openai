@@ -4,3 +4,7 @@ pypdf
 tiktoken
 ploomber
 gradio
+torch
+diffusers
+transformers
+accelerate

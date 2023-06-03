@@ -26,8 +26,9 @@ def seed_everything(seed: int):
 def generate_image_interface(prompt: str) -> object:
     """Generate image from prompt."""
     model_path = "sd-pokemon-model"
+    device = "mps" if torch.backends.mps.is_available() else "cpu"
     pipe = StableDiffusionPipeline.from_pretrained(model_path, safety_checker=None, requires_safety_checker=False)
-    pipe.to("mps")
+    pipe.to(device)
     image = pipe(prompt=prompt).images[0]
     return image
 
@@ -39,7 +40,9 @@ def main() -> None:
     output_image = gr.Image(label="Generated Image")
 
     demo = gr.Interface(fn=generate_image_interface, inputs=input_text, outputs=output_image)
-    demo.launch(share=True)
+    demo.launch(
+        # share=True
+    )
 
 
 if __name__ == "__main__":
