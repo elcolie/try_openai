@@ -14,3 +14,6 @@ torch
 # image2image
 opencv-contrib-python
 xformers
+# ControlNet
+huggingface-hub
+controlnet-aux
