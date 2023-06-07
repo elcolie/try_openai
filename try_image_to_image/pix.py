@@ -11,6 +11,6 @@ pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.conf
 # url = "https://raw.githubusercontent.com/timothybrooks/instruct-pix2pix/main/imgs/example.jpg"
 url = "c.jpeg"
 image = load_image(url)
-prompt: str = "Turn drawing into realistic colored human."
-image = pipe(prompt, image=image, num_inference_steps=20, image_guidance_scale=1).images[0]
+prompt: str = "Turn into realistic human."
+image = pipe(prompt, image=image, num_inference_steps=10, image_guidance_scale=1).images[0]
 image.save(f"images/pix.png")
