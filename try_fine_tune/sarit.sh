@@ -1,5 +1,5 @@
 export MODEL_NAME="runwayml/stable-diffusion-v1-5"
-export dataset_name="lambdalabs/pokemon-blip-captions"
+export dataset_name="/Users/sarit/study/try_openai/try_fine_tune/folder/train"
 
 accelerate launch --mixed_precision=no  train_text_to_image.py \
   --pretrained_model_name_or_path=$MODEL_NAME \
@@ -9,8 +9,8 @@ accelerate launch --mixed_precision=no  train_text_to_image.py \
   --train_batch_size=1 \
   --gradient_accumulation_steps=4 \
   --gradient_checkpointing \
-  --max_train_steps=15000 \
+  --max_train_steps=150 \
   --learning_rate=1e-05 \
   --max_grad_norm=1 \
   --lr_scheduler="constant" --lr_warmup_steps=0 \
-  --output_dir="sd-pokemon-model"
+  --output_dir="sarit-model"

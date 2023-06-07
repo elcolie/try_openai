@@ -8,3 +8,9 @@ torch
 diffusers
 transformers
 accelerate
+datasets
+torchvision
+torch
+# image2image
+opencv-contrib-python
+xformers
