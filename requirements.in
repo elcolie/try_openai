@@ -17,3 +17,4 @@ xformers
 # ControlNet
 huggingface-hub
 controlnet-aux
+mediapipe
