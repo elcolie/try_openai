@@ -1,3 +1,5 @@
+import typing as typ
+from tqdm import tqdm
 import torch
 from controlnet_aux import PidiNetDetector, HEDdetector
 from diffusers import (
@@ -21,31 +23,41 @@ image = load_image(
 )
 
 prompt = "bird"
-# prompt = "A realistic asian woman with cloth"
+# prompt = "realistic woman"
 
-# processor = HEDdetector.from_pretrained('lllyasviel/Annotators')
-processor = PidiNetDetector.from_pretrained('lllyasviel/Annotators')
-processor.netNetwork = processor.netNetwork.to(device)
-control_image = processor(image, safe=True)
-control_image.save("./images/control.png")
-# control_image = image
+processor_names = [
+    "HEDdetector",
+    "PidiNetDetector",
+]
+processor_checkpoints = [
+    HEDdetector.from_pretrained('lllyasviel/Annotators'),
+    PidiNetDetector.from_pretrained('lllyasviel/Annotators')
+]
+for processor_name, processor in zip(processor_names, processor_checkpoints):
+    processor.netNetwork = processor.netNetwork.to(device)
+    control_image = processor(image, safe=True)
+    control_image.save("./images/control.png")
 
+    checkpoints: typ.List[str] = [
+        "lllyasviel/control_v11p_sd15_softedge",
+        "lllyasviel/control_v11p_sd15_lineart",
+        "lllyasviel/control_v11p_sd15s2_lineart_anime",
+        "lllyasviel/control_v11p_sd15_canny",
+        "lllyasviel/control_v11p_sd15_scribble",
+    ]
+    for checkpoint in tqdm(checkpoints):
+        controlnet = ControlNetModel.from_pretrained(checkpoint).to(device)
+        pipe = StableDiffusionControlNetPipeline.from_pretrained(
+            "runwayml/stable-diffusion-v1-5", controlnet=controlnet,
+            safety_checker=None,
+            requires_safety_checker=False
+        ).to(device)
 
-# checkpoint: str = "lllyasviel/control_v11p_sd15_softedge"
-checkpoint: str = "lllyasviel/control_v11p_sd15_lineart"
-# checkpoint: str = "lllyasviel/control_v11p_sd15s2_lineart_anime"
-controlnet = ControlNetModel.from_pretrained(checkpoint).to(device)
-pipe = StableDiffusionControlNetPipeline.from_pretrained(
-    "runwayml/stable-diffusion-v1-5", controlnet=controlnet,
-    safety_checker=None,
-    requires_safety_checker=False
-).to(device)
+        pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
+        # pipe.enable_model_cpu_offload()
 
-pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
-# pipe.enable_model_cpu_offload()
+        generator = torch.manual_seed(181993)
+        step: int = 30
+        image = pipe(prompt, num_inference_steps=step, generator=generator, image=control_image).images[0]
 
-generator = torch.manual_seed(181993)
-step: int = 30
-image = pipe(prompt, num_inference_steps=step, generator=generator, image=control_image).images[0]
-
-image.save(f'images/image_out_{step}_2.png')
+        image.save(f'images/image_out_{step}_{processor_name}_{checkpoint.replace("lllyasviel/", "")}.png')
