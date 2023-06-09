@@ -1,3 +1,5 @@
+from itertools import combinations
+import os
 import typing as typ
 from tqdm import tqdm
 import torch
@@ -14,7 +16,9 @@ from diffusers.utils import load_image
 # please comment on https://github.com/pytorch/pytorch/issues/77764.
 # As a temporary fix, you can set the environment variable `PYTORCH_ENABLE_MPS_FALLBACK=1` to use the CPU as a fallback for this op.
 # WARNING: this will be slower than running natively on MPS.
-device = "cpu"  # PidiNetDetector is not support mps
+
+# device = "mps" if torch.backends.mps.is_available() else "cpu"
+device = "cpu"
 
 image = load_image(
     # "https://huggingface.co/lllyasviel/control_v11p_sd15_softedge/resolve/main/images/input.png"
@@ -22,7 +26,7 @@ image = load_image(
     "control.png"
 )
 
-prompt = "bird"
+prompt = "bird, best quality, extremely detailed"
 # prompt = "realistic woman"
 
 processor_names = [
@@ -38,17 +42,26 @@ for processor_name, processor in zip(processor_names, processor_checkpoints):
     control_image = processor(image, safe=True)
     control_image.save("./images/control.png")
 
-    checkpoints: typ.List[str] = [
+    base_checkpoints: typ.List[str] = [
         "lllyasviel/control_v11p_sd15_softedge",
         "lllyasviel/control_v11p_sd15_lineart",
         "lllyasviel/control_v11p_sd15s2_lineart_anime",
         "lllyasviel/control_v11p_sd15_canny",
         "lllyasviel/control_v11p_sd15_scribble",
+        "lllyasviel/sd-controlnet-canny",
+        "lllyasviel/sd-controlnet-depth",
+        "lllyasviel/sd-controlnet-hed",
+        "lllyasviel/sd-controlnet-normal",
+        "lllyasviel/sd-controlnet-scribble",
     ]
-    for checkpoint in tqdm(checkpoints):
-        controlnet = ControlNetModel.from_pretrained(checkpoint).to(device)
+    combinations_checkpoints = combinations(base_checkpoints, 2)
+    for checkpoints in list(combinations_checkpoints):
+        controlnet_list = [
+            ControlNetModel.from_pretrained(checkpoint).to(device)
+            for checkpoint in checkpoints
+        ]
         pipe = StableDiffusionControlNetPipeline.from_pretrained(
-            "runwayml/stable-diffusion-v1-5", controlnet=controlnet,
+            "runwayml/stable-diffusion-v1-5", controlnet=controlnet_list,
             safety_checker=None,
             requires_safety_checker=False
         ).to(device)
@@ -58,6 +71,7 @@ for processor_name, processor in zip(processor_names, processor_checkpoints):
 
         generator = torch.manual_seed(181993)
         step: int = 30
-        image = pipe(prompt, num_inference_steps=step, generator=generator, image=control_image).images[0]
+        images = [control_image, control_image]
+        image = pipe(prompt, images, num_inference_steps=step, generator=generator).images[0]
 
-        image.save(f'images/image_out_{step}_{processor_name}_{checkpoint.replace("lllyasviel/", "")}.png')
+        image.save(f'images/image_out_{step}_{processor_name}_{"_AND_".join(checkpoints).replace("lllyasviel/", "")}.png')
