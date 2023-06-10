@@ -22,6 +22,8 @@ altair==5.0.0
     # via gradio
 ansiwrap==0.8.4
     # via papermill
+antlr4-python3-runtime==4.9.3
+    # via omegaconf
 anyio==3.6.2
     # via
     #   httpcore
@@ -298,6 +300,8 @@ numpy==1.24.3
     #   torchvision
     #   transformers
     #   xformers
+omegaconf==2.3.0
+    # via -r requirements.in
 openai==0.27.7
     # via -r requirements.in
 opencv-contrib-python==4.7.0.72
@@ -424,6 +428,7 @@ pyyaml==6.0
     #   gradio
     #   huggingface-hub
     #   jupytext
+    #   omegaconf
     #   papermill
     #   ploomber
     #   ploomber-core

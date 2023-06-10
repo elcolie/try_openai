@@ -18,3 +18,5 @@ xformers
 huggingface-hub
 controlnet-aux
 mediapipe
+# civitAI
+omegaconf
