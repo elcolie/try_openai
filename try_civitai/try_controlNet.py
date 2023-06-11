@@ -39,12 +39,13 @@ pipe = StableDiffusionControlNetPipeline.from_pretrained(
 ).to(device)
 
 pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
-generator = torch.manual_seed(0)
+generator = torch.manual_seed(1200)
 
 prompt: str = "realistic woman, best quality"
-out_images = pipe(
-    prompt, num_inference_steps=100, generator=generator, image=canny_image, num_images_per_prompt=4,
-    guidance_scale=3, negative_prompt="low quality, bad hands"
-)
-for idx, image in enumerate(out_images.images):
-    image.save(f"controlnet_{idx}.png")
+for guidance_scale in [0.5, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7]:
+    out_images = pipe(
+        prompt, num_inference_steps=100, generator=generator, image=canny_image, num_images_per_prompt=4,
+        guidance_scale=guidance_scale, negative_prompt="low quality, bad hands"
+    )
+    for idx, image in enumerate(out_images.images):
+        image.save(f"controlnet_{guidance_scale}_{idx}.png")
