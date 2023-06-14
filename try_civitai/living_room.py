@@ -3,6 +3,7 @@ Get safetensor from civitAI
 https://civitai.com/models/43331/majicmix-realistic
 """
 # Let's load the popular vermeer image
+import typing as typ
 import cv2
 import numpy as np
 import torch
@@ -16,11 +17,13 @@ from diffusers.utils import load_image
 # please comment on https://github.com/pytorch/pytorch/issues/77764. As a temporary fix,
 # you can set the environment variable `PYTORCH_ENABLE_MPS_FALLBACK=1` to use the CPU as a fallback for this op.
 # WARNING: this will be slower than running natively on MPS.
+# AppleInternal/Library/BuildRoots/2acced82-df86-11ed-9b95-428477786501/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShaders/MPSCore/Types/MPSNDArray.mm:725:
+# failed assertion `[MPSNDArray initWithDevice:descriptor:] Error: total bytes of NDArray > 2**32'
 # device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
 device = torch.device("cpu")
+# device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 image = load_image(
-    # "https://hf.co/datasets/huggingface/documentation-images/resolve/main/diffusers/input_image_vermeer.png"
-    "../try_image_to_image/c.jpeg"
+    "./sources/laplace_filter_small.png"
 )
 
 image = np.array(image)
@@ -33,30 +36,32 @@ image = image[:, :, None]
 image = np.concatenate([image, image, image], axis=2)
 canny_image = Image.fromarray(image)
 
-controlnet = ControlNetModel.from_pretrained("lllyasviel/sd-controlnet-canny").to(device)
+#❯ python convert_original_stable_diffusion_to_diffusers.py --checkpoint_path controlNet/control_sd15_canny.pth --dump_path converted
+control_model_name: str = "sd-controlnet-canny"
+controlnet = ControlNetModel.from_pretrained(f"lllyasviel/{control_model_name}").to(device)
+
 pipe = StableDiffusionControlNetPipeline.from_pretrained(
     # "runwayml/stable-diffusion-v1-5",
-    # "sinkinai/majicMIX-realistic-v5",
-    "majicMIX-realistic-v5",
+    "sinkinai/majicMIX-realistic-v5",
+    # "majicMIX-realistic-v5",
     safety_checker=None,
     controlnet=controlnet,
 ).to(device)
 
 
 pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
-generator = torch.manual_seed(1200)
+generator = torch.manual_seed(12003)
 
-prompt: str = "realistic woman, best quality"
-negative_prompt: str = "low quality, bad hands"
-num_images_per_prompt: int = 4
-for guidance_scale in [
-    0, 1, 1.5, 2, 2.5, 3.0, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7,
-    8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.5, 13, 13.5
-]:
+# prompt: typ.List[str] = ["a tree", "red couch", "cozy", "new", "shinny"]
+# negative_prompt: typ.List[str] = ["low quality", "bad", "old furniture", "dirty", "damage"]
+# assert len(prompt) == len(negative_prompt)
+prompt: str = "a tree, red couch, cozy, new, shinny"
+negative_prompt: str = "low quality, bad, old furniture, dirty, damage"
+for guidance_scale in range(0, 30):
     out_images = pipe(
-        prompt, num_inference_steps=20, generator=generator, image=canny_image,
-        num_images_per_prompt=num_images_per_prompt,
+        prompt, num_images_per_prompt=4,
+        num_inference_steps=50, generator=generator, image=canny_image,
         guidance_scale=guidance_scale, negative_prompt=negative_prompt
     )
     for idx, image in enumerate(out_images.images):
-        image.save(f"controlnet_images/{guidance_scale}_{idx}.png")
+        image.save(f"controlnet_images/{control_model_name}_{guidance_scale}_{idx}.png")
