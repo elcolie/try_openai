@@ -3,6 +3,7 @@ Get safetensor from civitAI
 https://civitai.com/models/43331/majicmix-realistic
 """
 # Let's load the popular vermeer image
+import os
 import typing as typ
 from tqdm import tqdm
 import cv2
@@ -67,11 +68,16 @@ for control_model_name in tqdm(control_nets):
     # assert len(prompt) == len(negative_prompt)
     prompt: str = "shinny, chick, cat, cute, pretty, colorful,"
     negative_prompt: str = "low quality, dirty, damage"
+    num_images_per_prompt: int = 4
     for guidance_scale in range(0, 30):
-        out_images = pipe(
-            prompt, num_images_per_prompt=4,
-            num_inference_steps=30, generator=generator, image=canny_image,
-            guidance_scale=guidance_scale, negative_prompt=negative_prompt
-        )
-        for idx, image in enumerate(out_images.images):
-            image.save(f"maows/{control_model_name}_{guidance_scale}_{idx}.png")
+        # check existing file
+        if not os.path.exists(f"maows/{control_model_name}_{guidance_scale}_{0}.png"):
+            out_images = pipe(
+                prompt, num_images_per_prompt=num_images_per_prompt,
+                num_inference_steps=30, generator=generator, image=canny_image,
+                guidance_scale=guidance_scale, negative_prompt=negative_prompt
+            )
+            print(f"Running: maows/{control_model_name}_{guidance_scale}")
+            for idx, image in enumerate(out_images.images):
+                filename = f"maows/{control_model_name}_{guidance_scale}_{idx}.png"
+                image.save(filename)
