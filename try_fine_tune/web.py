@@ -26,23 +26,29 @@ def seed_everything(seed: int):
 def generate_image_interface(prompt: str) -> object:
     """Generate image from prompt."""
     # model_path = "runwayml/stable-diffusion-v1-5"
-    model_path = "Lykon/DreamShaper"
+    # model_path = "Lykon/DreamShaper"
+    model_path = "sarit-model"
     device = "mps" if torch.backends.mps.is_available() else "cpu"
     pipe = StableDiffusionPipeline.from_pretrained(model_path, safety_checker=None, requires_safety_checker=False)
     pipe.to(device)
-    image = pipe(prompt=prompt).images[0]
-    return image
+    images = pipe(prompt=prompt, num_images_per_prompt=3).images
+    # for idx,img in enumerate(images):
+    #     img.save(f"{idx}.png")
+    return images
 
 
 def main() -> None:
     """Run the main function."""
     seed_everything(42)
     input_text = gr.Textbox(lines=2, label="Enter a sentence. The processing time takes about 15 seconds.")
-    output_image = gr.Image(label="Generated Image")
+    # output_images = gr.Image(label="Generated Image", type="numpy", multiple=True)
+    gallery = gr.Gallery(
+        label="Generated images", show_label=False, elem_id="gallery"
+    ).style(columns=[2], rows=[2], object_fit="contain", height="auto")
 
-    demo = gr.Interface(fn=generate_image_interface, inputs=input_text, outputs=output_image)
+    demo = gr.Interface(fn=generate_image_interface, inputs=input_text, outputs=gallery)
     demo.launch(
-        share=True
+        # share=True
     )
 
 

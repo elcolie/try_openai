@@ -1,4 +1,5 @@
-export MODEL_NAME="runwayml/stable-diffusion-v1-5"
+#export MODEL_NAME="runwayml/stable-diffusion-v1-5"
+export MODEL_NAME="digiplay/majicMIX_realistic_v6"
 export dataset_name="/Users/sarit/study/try_openai/try_fine_tune/folder/train"
 
 accelerate launch --mixed_precision=no  train_text_to_image.py \

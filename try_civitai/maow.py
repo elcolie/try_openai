@@ -54,7 +54,8 @@ for control_model_name in tqdm(control_nets):
 
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
         # "runwayml/stable-diffusion-v1-5",
-        "sinkinai/majicMIX-realistic-v5",
+        # "sinkinai/majicMIX-realistic-v5",
+        "digiplay/majicMIX_realistic_v6",
         # "lmajicMIX-realistic-v5",
         safety_checker=None,
         controlnet=controlnet,
@@ -72,12 +73,13 @@ for control_model_name in tqdm(control_nets):
     for guidance_scale in range(0, 30):
         # check existing file
         if not os.path.exists(f"maows/{control_model_name}_{guidance_scale}_{0}.png"):
+            print("==============================")
+            print(f"Running: maows/{control_model_name}_{guidance_scale}")
             out_images = pipe(
                 prompt, num_images_per_prompt=num_images_per_prompt,
                 num_inference_steps=30, generator=generator, image=canny_image,
                 guidance_scale=guidance_scale, negative_prompt=negative_prompt
             )
-            print(f"Running: maows/{control_model_name}_{guidance_scale}")
             for idx, image in enumerate(out_images.images):
                 filename = f"maows/{control_model_name}_{guidance_scale}_{idx}.png"
                 image.save(filename)
