@@ -1,0 +1,1602 @@
+{
+    "3.0_0.png": {
+        "src": "images/photos/3.0_0.png",
+        "mtime": 1686557921.6750684,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.0_1.png": {
+        "src": "images/photos/3.0_1.png",
+        "mtime": 1686557921.9498656,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.0_2.png": {
+        "src": "images/photos/3.0_2.png",
+        "mtime": 1686557922.2188618,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.0_3.png": {
+        "src": "images/photos/3.0_3.png",
+        "mtime": 1686557922.4893649,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.5_0.png": {
+        "src": "images/photos/3.5_0.png",
+        "mtime": 1686559561.8681958,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.5_1.png": {
+        "src": "images/photos/3.5_1.png",
+        "mtime": 1686559562.1430357,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.5_2.png": {
+        "src": "images/photos/3.5_2.png",
+        "mtime": 1686559562.4166248,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "3.5_3.png": {
+        "src": "images/photos/3.5_3.png",
+        "mtime": 1686559562.6961582,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4.5_0.png": {
+        "src": "images/photos/4.5_0.png",
+        "mtime": 1686562832.148503,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4.5_1.png": {
+        "src": "images/photos/4.5_1.png",
+        "mtime": 1686562832.448993,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4.5_2.png": {
+        "src": "images/photos/4.5_2.png",
+        "mtime": 1686562832.7408662,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4.5_3.png": {
+        "src": "images/photos/4.5_3.png",
+        "mtime": 1686562833.0264163,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4_0.png": {
+        "src": "images/photos/4_0.png",
+        "mtime": 1686561191.8525746,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4_1.png": {
+        "src": "images/photos/4_1.png",
+        "mtime": 1686561192.1284268,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4_2.png": {
+        "src": "images/photos/4_2.png",
+        "mtime": 1686561192.4174647,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "4_3.png": {
+        "src": "images/photos/4_3.png",
+        "mtime": 1686561192.6851215,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/4_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5.5_0.png": {
+        "src": "images/photos/5.5_0.png",
+        "mtime": 1686566077.375012,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5.5_1.png": {
+        "src": "images/photos/5.5_1.png",
+        "mtime": 1686566077.653927,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5.5_2.png": {
+        "src": "images/photos/5.5_2.png",
+        "mtime": 1686566077.93674,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5.5_3.png": {
+        "src": "images/photos/5.5_3.png",
+        "mtime": 1686566078.206747,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5_0.png": {
+        "src": "images/photos/5_0.png",
+        "mtime": 1686564476.6331205,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5_1.png": {
+        "src": "images/photos/5_1.png",
+        "mtime": 1686564476.9064953,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5_2.png": {
+        "src": "images/photos/5_2.png",
+        "mtime": 1686564477.1821303,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "5_3.png": {
+        "src": "images/photos/5_3.png",
+        "mtime": 1686564477.4631562,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/5_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6.5_0.png": {
+        "src": "images/photos/6.5_0.png",
+        "mtime": 1686569279.7093217,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6.5_1.png": {
+        "src": "images/photos/6.5_1.png",
+        "mtime": 1686569279.9908469,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6.5_2.png": {
+        "src": "images/photos/6.5_2.png",
+        "mtime": 1686569280.285219,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6.5_3.png": {
+        "src": "images/photos/6.5_3.png",
+        "mtime": 1686569280.5790076,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6_0.png": {
+        "src": "images/photos/6_0.png",
+        "mtime": 1686567679.951392,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6_1.png": {
+        "src": "images/photos/6_1.png",
+        "mtime": 1686567680.2373185,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6_2.png": {
+        "src": "images/photos/6_2.png",
+        "mtime": 1686567680.5302587,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "6_3.png": {
+        "src": "images/photos/6_3.png",
+        "mtime": 1686567680.8058321,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/6_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "7_0.png": {
+        "src": "images/photos/7_0.png",
+        "mtime": 1686570878.979286,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/7_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "7_1.png": {
+        "src": "images/photos/7_1.png",
+        "mtime": 1686570879.265629,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/7_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "7_2.png": {
+        "src": "images/photos/7_2.png",
+        "mtime": 1686570879.5532637,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/7_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "7_3.png": {
+        "src": "images/photos/7_3.png",
+        "mtime": 1686570879.8357604,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/7_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "canny_0_0.png": {
+        "src": "images/photos/canny_0_0.png",
+        "mtime": 1686595089.9192283,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_0.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_1.png": {
+        "src": "images/photos/canny_0_1.png",
+        "mtime": 1686595090.0947165,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_1.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_10.png": {
+        "src": "images/photos/canny_0_10.png",
+        "mtime": 1686595091.703793,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_10.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_11.png": {
+        "src": "images/photos/canny_0_11.png",
+        "mtime": 1686595091.880991,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_11.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_12.png": {
+        "src": "images/photos/canny_0_12.png",
+        "mtime": 1686595092.0513341,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_12.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_13.png": {
+        "src": "images/photos/canny_0_13.png",
+        "mtime": 1686595092.2372298,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_13.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_14.png": {
+        "src": "images/photos/canny_0_14.png",
+        "mtime": 1686595092.398017,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_14.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_15.png": {
+        "src": "images/photos/canny_0_15.png",
+        "mtime": 1686595092.5693147,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_15.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_16.png": {
+        "src": "images/photos/canny_0_16.png",
+        "mtime": 1686595092.7422855,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_16.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_17.png": {
+        "src": "images/photos/canny_0_17.png",
+        "mtime": 1686595092.9097233,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_17.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_18.png": {
+        "src": "images/photos/canny_0_18.png",
+        "mtime": 1686595093.0917795,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_18.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_19.png": {
+        "src": "images/photos/canny_0_19.png",
+        "mtime": 1686595093.2705135,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_19.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_2.png": {
+        "src": "images/photos/canny_0_2.png",
+        "mtime": 1686595090.270701,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_2.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_3.png": {
+        "src": "images/photos/canny_0_3.png",
+        "mtime": 1686595090.4488626,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_3.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_4.png": {
+        "src": "images/photos/canny_0_4.png",
+        "mtime": 1686595090.6219642,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_4.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_5.png": {
+        "src": "images/photos/canny_0_5.png",
+        "mtime": 1686595090.8077319,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_5.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_6.png": {
+        "src": "images/photos/canny_0_6.png",
+        "mtime": 1686595090.9830298,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_6.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_7.png": {
+        "src": "images/photos/canny_0_7.png",
+        "mtime": 1686595091.1618624,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_7.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_8.png": {
+        "src": "images/photos/canny_0_8.png",
+        "mtime": 1686595091.3461626,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_8.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_0_9.png": {
+        "src": "images/photos/canny_0_9.png",
+        "mtime": 1686595091.5250304,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_0_9.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_0.png": {
+        "src": "images/photos/canny_1_0.png",
+        "mtime": 1686598752.7960804,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_0.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_1.png": {
+        "src": "images/photos/canny_1_1.png",
+        "mtime": 1686598752.9630263,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_1.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_10.png": {
+        "src": "images/photos/canny_1_10.png",
+        "mtime": 1686598754.5767171,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_10.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_11.png": {
+        "src": "images/photos/canny_1_11.png",
+        "mtime": 1686598754.753673,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_11.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_12.png": {
+        "src": "images/photos/canny_1_12.png",
+        "mtime": 1686598754.935918,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_12.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_13.png": {
+        "src": "images/photos/canny_1_13.png",
+        "mtime": 1686598755.1022677,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_13.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_14.png": {
+        "src": "images/photos/canny_1_14.png",
+        "mtime": 1686598755.2802312,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_14.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_15.png": {
+        "src": "images/photos/canny_1_15.png",
+        "mtime": 1686598755.4600835,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_15.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_16.png": {
+        "src": "images/photos/canny_1_16.png",
+        "mtime": 1686598755.641121,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_16.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_17.png": {
+        "src": "images/photos/canny_1_17.png",
+        "mtime": 1686598755.8170702,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_17.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_18.png": {
+        "src": "images/photos/canny_1_18.png",
+        "mtime": 1686598755.9955573,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_18.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_19.png": {
+        "src": "images/photos/canny_1_19.png",
+        "mtime": 1686598756.177198,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_19.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_2.png": {
+        "src": "images/photos/canny_1_2.png",
+        "mtime": 1686598753.1425216,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_2.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_3.png": {
+        "src": "images/photos/canny_1_3.png",
+        "mtime": 1686598753.3194826,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_3.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_4.png": {
+        "src": "images/photos/canny_1_4.png",
+        "mtime": 1686598753.496307,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_4.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_5.png": {
+        "src": "images/photos/canny_1_5.png",
+        "mtime": 1686598753.677765,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_5.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_6.png": {
+        "src": "images/photos/canny_1_6.png",
+        "mtime": 1686598753.860537,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_6.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_7.png": {
+        "src": "images/photos/canny_1_7.png",
+        "mtime": 1686598754.0389268,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_7.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_8.png": {
+        "src": "images/photos/canny_1_8.png",
+        "mtime": 1686598754.2137764,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_8.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "canny_1_9.png": {
+        "src": "images/photos/canny_1_9.png",
+        "mtime": 1686598754.3985932,
+        "date": "",
+        "size": [
+            800,
+            592
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/canny_1_9.jpg",
+        "thumbnail_size": [
+            216,
+            160
+        ]
+    },
+    "controlnet_0.5_0.png": {
+        "src": "images/photos/controlnet_0.5_0.png",
+        "mtime": 1686539672.0820985,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_0.5_1.png": {
+        "src": "images/photos/controlnet_0.5_1.png",
+        "mtime": 1686539672.3931458,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_0.5_2.png": {
+        "src": "images/photos/controlnet_0.5_2.png",
+        "mtime": 1686539672.6837986,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_0.5_3.png": {
+        "src": "images/photos/controlnet_0.5_3.png",
+        "mtime": 1686539672.977978,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1.5_0.png": {
+        "src": "images/photos/controlnet_1.5_0.png",
+        "mtime": 1686549792.2841623,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1.5_1.png": {
+        "src": "images/photos/controlnet_1.5_1.png",
+        "mtime": 1686549792.5480735,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1.5_2.png": {
+        "src": "images/photos/controlnet_1.5_2.png",
+        "mtime": 1686549792.8226593,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1.5_3.png": {
+        "src": "images/photos/controlnet_1.5_3.png",
+        "mtime": 1686549793.0970635,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1_0.png": {
+        "src": "images/photos/controlnet_1_0.png",
+        "mtime": 1686548158.821821,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1_1.png": {
+        "src": "images/photos/controlnet_1_1.png",
+        "mtime": 1686548159.089971,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1_2.png": {
+        "src": "images/photos/controlnet_1_2.png",
+        "mtime": 1686548159.3608403,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_1_3.png": {
+        "src": "images/photos/controlnet_1_3.png",
+        "mtime": 1686548159.6280167,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_1_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2.5_0.png": {
+        "src": "images/photos/controlnet_2.5_0.png",
+        "mtime": 1686553087.5090203,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2.5_1.png": {
+        "src": "images/photos/controlnet_2.5_1.png",
+        "mtime": 1686553087.793897,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2.5_2.png": {
+        "src": "images/photos/controlnet_2.5_2.png",
+        "mtime": 1686553088.0697935,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2.5_3.png": {
+        "src": "images/photos/controlnet_2.5_3.png",
+        "mtime": 1686553088.3369908,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2_0.png": {
+        "src": "images/photos/controlnet_2_0.png",
+        "mtime": 1686551439.9536567,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2_0.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2_1.png": {
+        "src": "images/photos/controlnet_2_1.png",
+        "mtime": 1686551440.2260346,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2_1.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2_2.png": {
+        "src": "images/photos/controlnet_2_2.png",
+        "mtime": 1686551440.4964128,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2_2.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_2_3.png": {
+        "src": "images/photos/controlnet_2_3.png",
+        "mtime": 1686551440.7669418,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_2_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_3.0_0.png": {
+        "src": "images/photos/controlnet_3.0_0.png",
+        "mtime": 1686554735.406724,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_3.0_1.png": {
+        "src": "images/photos/controlnet_3.0_1.png",
+        "mtime": 1686554735.6793323,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_3.0_2.png": {
+        "src": "images/photos/controlnet_3.0_2.png",
+        "mtime": 1686554735.9578133,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    },
+    "controlnet_3.0_3.png": {
+        "src": "images/photos/controlnet_3.0_3.png",
+        "mtime": 1686554736.2300339,
+        "date": "",
+        "size": [
+            688,
+            1024
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images/thumbnails/controlnet_3.jpg",
+        "thumbnail_size": [
+            108,
+            160
+        ]
+    }
+}
