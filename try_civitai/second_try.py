@@ -16,6 +16,7 @@ device = "mps" if torch.backends.mps.is_available() else "cpu"
 multipliers: typ.List[float] = list(range(1, 11))
 guidances: typ.List[float] = list(range(1, 11))
 etas: typ.List[float] = list(range(1, 11))
+output_dir: str = "zzz"
 
 # Combine the lists into a single list of tuples
 combined_list = list(itertools.product(multipliers, guidances, etas))
@@ -30,7 +31,7 @@ for item in tqdm(combined_list, desc="Overall"):
     guidance_scale: float = 0.2 * _guidance
     eta: float = 0.2 * _eta
     # Check existing file
-    if not os.path.isfile(f"zz/character_{multiplier}_{guidance_scale}_{eta}_0.png"):
+    if not os.path.isfile(f"{output_dir}/character_{multiplier}_{guidance_scale}_{eta}_0.png"):
         print(f"Start working on character_{multiplier}_{guidance_scale}_{eta}")
         # https://civitai.com/models/43331/majicmix-realistic
         model_base = "majicmixRealistic_v6.safetensors"
@@ -49,7 +50,7 @@ for item in tqdm(combined_list, desc="Overall"):
             prompt, num_inference_steps=50, num_images_per_prompt=10, eta=eta,
             guidance_scale=guidance_scale, negative_prompt=negative_prompt)
         for idx, image in enumerate(result.images):
-            output_filename: str = f"zz/character_{multiplier}_{guidance_scale}_{eta}_{idx}.png"
+            output_filename: str = f"{output_dir}/character_{multiplier}_{guidance_scale}_{eta}_{idx}.png"
             image.save(output_filename)
     else:
         pass
