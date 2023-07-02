@@ -6,7 +6,9 @@ https://civitai.com/models/87191/animechar-with-clothings-makai-tenshi-mix-or-se
 """
 # Let's load the popular vermeer image
 import os
+import random
 import typing as typ
+import itertools
 from tqdm import tqdm
 import cv2
 import numpy as np
@@ -50,7 +52,15 @@ control_nets: typ.List[str] = [
     "sd-controlnet-hed",
     "sd-controlnet-scribble",
 ]
-for control_model_name in tqdm(control_nets):
+guidances = list(range(0, 30, 2))
+combined_list = list(itertools.product(control_nets, guidances))
+
+# Shuffle the combined list
+random.shuffle(combined_list)
+
+
+for item in tqdm(combined_list, total=len(combined_list)):
+    control_model_name, guidance_scale = item
     controlnet = ControlNetModel.from_pretrained(f"lllyasviel/{control_model_name}").to(device)
 
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
@@ -65,19 +75,18 @@ for control_model_name in tqdm(control_nets):
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     generator = torch.manual_seed(12003)
 
-    prompt: str = "clean, two tables, 4 chairs, glass door, glass wall, dim light"
-    negative_prompt: str = "low quality, dirty, damage, dark"
-    num_images_per_prompt: int = 4
-    for guidance_scale in range(0, 30, 2):
-        # check existing file
-        if not os.path.exists(f"{output_dir}/{control_model_name}_{guidance_scale}_{0}.png"):
-            print("==============================")
-            print(f"Running: {output_dir}/{control_model_name}_{guidance_scale}")
-            out_images = pipe(
-                prompt, num_images_per_prompt=num_images_per_prompt,
-                num_inference_steps=30, generator=generator, image=canny_image,
-                guidance_scale=guidance_scale, negative_prompt=negative_prompt
-            )
-            for idx, image in enumerate(out_images.images):
-                filename = f"{output_dir}/{control_model_name}_{guidance_scale}_{idx}.png"
-                image.save(filename)
+    prompt: str = "(best-quality:0.8), (best-quality:0.8), perfect anime illustration, nime style, clean, two tables, 4 chairs, glass door, glass wall, dim light"
+    negative_prompt: str = "(worst quality:0.8), verybadimagenegative_v1.3 easynegative, (surreal:0.8), (modernism:0.8), (art deco:0.8), (art nouveau:0.8)"
+    num_images_per_prompt: int = 2
+    # check existing file
+    if not os.path.exists(f"{output_dir}/{control_model_name}_{guidance_scale}_{0}.png"):
+        print("==============================")
+        print(f"Running: {output_dir}/{control_model_name}_{guidance_scale}")
+        out_images = pipe(
+            prompt, num_images_per_prompt=num_images_per_prompt,
+            num_inference_steps=30, generator=generator, image=canny_image,
+            guidance_scale=guidance_scale, negative_prompt=negative_prompt
+        )
+        for idx, image in enumerate(out_images.images):
+            filename = f"{output_dir}/{control_model_name}_{guidance_scale}_{idx}.png"
+            image.save(filename)
