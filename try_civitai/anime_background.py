@@ -26,9 +26,10 @@ from diffusers.utils import load_image
 # device = torch.device("mps") if torch.backends.mps.is_available() else torch.device("cpu")
 device = torch.device("cpu")
 image = load_image(
-    "./sources/46350.jpg"
+    "./sources/eunho.png"
 )
-output_dir: str = "anime_background"
+output_dir: str = "nat"
+num_images_per_prompt: int = 1
 
 image = np.array(image)
 scale_percent = 60  # percent of original size
@@ -49,10 +50,11 @@ canny_image = Image.fromarray(image)
 
 control_nets: typ.List[str] = [
     "sd-controlnet-canny",
-    "sd-controlnet-hed",
-    "sd-controlnet-scribble",
+    # "sd-controlnet-hed",
+    # "sd-controlnet-scribble",
 ]
-guidances = list(range(0, 30, 2))
+# guidances = list(range(0, 30, 2))
+guidances = [28]
 combined_list = list(itertools.product(control_nets, guidances))
 
 # Shuffle the combined list
@@ -68,16 +70,15 @@ for item in tqdm(combined_list, total=len(combined_list)):
         safety_checker=None,
         controlnet=controlnet,
         local_files_only=True,
-        low_cpu_mem_usage=False
+        low_cpu_mem_usage=False,
         # cache_dir="./flat2DAnimerge"
     ).to(device)
 
     pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
     generator = torch.manual_seed(12003)
 
-    prompt: str = "(best-quality:0.8), (best-quality:0.8), perfect anime illustration, nime style, clean, two tables, 4 chairs, glass door, glass wall, dim light"
+    prompt: str = "(best-quality:0.8), (best-quality:0.8), perfect anime illustration, Summer, Masterpiece, Surrealism Art, telephoto lens, Kodak portrait, full of color, trending on artstation, trending on CGSociety, portrait in the game room, original face"
     negative_prompt: str = "(worst quality:0.8), verybadimagenegative_v1.3 easynegative, (surreal:0.8), (modernism:0.8), (art deco:0.8), (art nouveau:0.8)"
-    num_images_per_prompt: int = 2
     # check existing file
     if not os.path.exists(f"{output_dir}/{control_model_name}_{guidance_scale}_{0}.png"):
         print("==============================")
@@ -85,7 +86,7 @@ for item in tqdm(combined_list, total=len(combined_list)):
         out_images = pipe(
             prompt, num_images_per_prompt=num_images_per_prompt,
             num_inference_steps=30, generator=generator, image=canny_image,
-            guidance_scale=guidance_scale, negative_prompt=negative_prompt
+            guidance_scale=guidance_scale, negative_prompt=negative_prompt,
         )
         for idx, image in enumerate(out_images.images):
             filename = f"{output_dir}/{control_model_name}_{guidance_scale}_{idx}.png"
