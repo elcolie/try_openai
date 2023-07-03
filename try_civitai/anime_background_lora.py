@@ -1,5 +1,5 @@
 """
-Part of anime_background experiments.
+Part of anime_background experiments. (This experiment is not work)
 This file focus on Lora.
 Experiment the real input background picture to anime.
 https://civitai.com/models/35960/flat-2d-animerge
@@ -35,6 +35,7 @@ image = load_image(
     "./sources/46350.jpg"
 )
 output_dir: str = "anime_background_lora"
+num_images_per_prompt: int = 2
 
 image = np.array(image)
 scale_percent = 60  # percent of original size
@@ -88,9 +89,8 @@ for item in tqdm(combined_list, total=total_combinations):
     generator = torch.manual_seed(seed)
     seed_everything(seed)
 
-    prompt: str = "clean, two tables, 4 chairs, glass door, glass wall, dim light"
+    prompt: str = "masterpiece, best quality, highly detailed, refined rendering, illustration, clean, two tables, 4 chairs, glass door, glass wall, dim light"
     negative_prompt: str = "low quality, dirty, damage, dark"
-    num_images_per_prompt: int = 4
 
     # check existing file
     if not os.path.exists(f"{output_dir}/{lora}_{control_model_name}_{guidance_scale}_{multiplier}_0.png"):
