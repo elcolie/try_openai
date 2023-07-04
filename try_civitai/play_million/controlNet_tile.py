@@ -5,9 +5,11 @@ from diffusers.utils import load_image
 
 from set_seed import seed_everything
 
-seed_everything(444)
+seed: int = 888
 # device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 device: str = "cpu"
+
+seed_everything(seed)
 
 
 def resize_for_condition_image(input_image: Image, resolution: int):
@@ -23,21 +25,23 @@ def resize_for_condition_image(input_image: Image, resolution: int):
 
 
 controlnet = ControlNetModel.from_pretrained('lllyasviel/control_v11f1e_sd15_tile')
-pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5",
-                                         custom_pipeline="stable_diffusion_controlnet_img2img",
-                                         controlnet=controlnet,
-                                         safety_checker=None).to(device)
+pipe = DiffusionPipeline.from_pretrained(
+    # "runwayml/stable-diffusion-v1-5",
+    "../flat2DAnimerge",
+    custom_pipeline="stable_diffusion_controlnet_img2img",
+    controlnet=controlnet,
+    safety_checker=None).to(device)
 
 source_image = load_image("/Users/sarit/million/IMG_5696.JPG")
 condition_image = resize_for_condition_image(source_image, 1024)
-image = pipe(prompt="best quality",
-             negative_prompt="blur, lowres, bad anatomy, bad hands, cropped, worst quality",
+image = pipe(prompt="best quality, high resolution, clean, dim light",
+             negative_prompt="blur, lowres, bad anatomy, bad hands, cropped, worst quality, sweat",
              image=condition_image,
              controlnet_conditioning_image=condition_image,
              width=condition_image.size[0],
              height=condition_image.size[1],
-             strength=1.0,
-             generator=torch.manual_seed(0),
+             strength=0.25,
+             generator=torch.manual_seed(seed),
              num_inference_steps=32,
              ).images[0]
 
