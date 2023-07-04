@@ -34,13 +34,13 @@ pipe = DiffusionPipeline.from_pretrained(
 
 source_image = load_image("/Users/sarit/million/IMG_5696.JPG")
 condition_image = resize_for_condition_image(source_image, 1024)
-image = pipe(prompt="best quality, high resolution, clean, dim light",
-             negative_prompt="blur, lowres, bad anatomy, bad hands, cropped, worst quality, sweat",
+image = pipe(prompt="best quality, high resolution, clean, medium light",
+             negative_prompt="blur, low resolution, bad anatomy, bad hands, cropped, worst quality, sweat",
              image=condition_image,
              controlnet_conditioning_image=condition_image,
              width=condition_image.size[0],
              height=condition_image.size[1],
-             strength=0.25,
+             strength=1.0,
              generator=torch.manual_seed(seed),
              num_inference_steps=32,
              ).images[0]
