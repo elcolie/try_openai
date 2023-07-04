@@ -1,6 +1,6 @@
 import torch
 from PIL import Image
-from diffusers import ControlNetModel, DiffusionPipeline
+from diffusers import ControlNetModel, StableDiffusionControlNetPipeline
 from diffusers.utils import load_image
 
 from set_seed import seed_everything
@@ -25,9 +25,10 @@ def resize_for_condition_image(input_image: Image, resolution: int):
 
 
 controlnet = ControlNetModel.from_pretrained('lllyasviel/control_v11f1e_sd15_tile')
-pipe = DiffusionPipeline.from_pretrained(
+pipe = StableDiffusionControlNetPipeline.from_pretrained(
     # "runwayml/stable-diffusion-v1-5",
-    "../flat2DAnimerge",
+    # "../flat2DAnimerge",
+    "../majicmixRealistic_v6",
     custom_pipeline="stable_diffusion_controlnet_img2img",
     controlnet=controlnet,
     safety_checker=None).to(device)
