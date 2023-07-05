@@ -35,7 +35,7 @@ pipe = StableDiffusionControlNetPipeline.from_pretrained(
 
 source_image = load_image("/Users/sarit/million/IMG_5696.JPG")
 condition_image = resize_for_condition_image(source_image, 1024)
-image = pipe(prompt="best quality, high resolution, clean, medium light",
+image = pipe(prompt="best quality, high resolution, clean, medium light, necklace",
              negative_prompt="blur, low resolution, bad anatomy, bad hands, cropped, worst quality, sweat",
              image=condition_image,
              controlnet_conditioning_image=condition_image,
