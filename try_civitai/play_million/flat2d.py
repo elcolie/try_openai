@@ -23,7 +23,8 @@ device = torch.device("cpu")
 image = load_image(
     "/Users/sarit/million/IMG_5696.JPG"
 )
-output_dir: str = "output"
+output_dir: str = "flat2d"
+num_images_per_prompt: int = 4
 
 image = np.array(image)
 scale_percent = 20  # percent of original size
@@ -72,8 +73,7 @@ for item in tqdm(combined_list, total=len(combined_list)):
     generator = torch.manual_seed(12003)
 
     prompt: str = "(best-quality:0.8), perfect anime illustration, anime style, extreme closeup poortait of a nude pretty girl, rope bondage, shibari"
-    negative_prompt: str = "(worst quality:0.8), verybadimagenegative_v1.3 easynegative, (surreal:0.8), (modernism:0.8), (art deco:0.8), (art nouveau:0.8), wrinkle"
-    num_images_per_prompt: int = 2
+    negative_prompt: str = "(worst quality:0.8), verybadimagenegative_v1.3 easynegative, (surreal:0.8), (modernism:0.8), (art deco:0.8), (art nouveau:0.8), wrinkle, bad hands, bad mouth"
     # check existing file
     if not os.path.exists(f"{output_dir}/{control_model_name}_{guidance_scale}_{0}.png"):
         print("==============================")
