@@ -3,16 +3,18 @@ https://www.facebook.com/photo/?fbid=230317606517173&set=gm.1042375796884526&ido
 Remove bikini.
 """
 import itertools
+import math
 import os.path
 import random
 
+from PIL import Image
 from diffusers import StableDiffusionInpaintPipeline
 from diffusers.utils import load_image
 from tqdm import tqdm
 
 from set_seed import seed_everything
 
-seed: int = 8888
+seed: int = 88888
 seed_everything(seed)
 device: str = "cpu"
 num_images_per_prompt: int = 1
@@ -29,11 +31,26 @@ combined_list = list(itertools.product(strengths, guidance_scales, eta_list))
 random.shuffle(combined_list)
 
 model_id = "runwayml/stable-diffusion-inpainting"
-prompt = "Replace her cloth with sexy bikini, shoulder bag, boob"
+prompt = "Replace her cloth with sexy bikini, shoulder bag, boob, thong"
 negative_prompt: str = "blur, bad quality, beach, bad shape, skinny"
 source_image = load_image("sources/koch.jpeg")
 masked_image = load_image("sources/masked_koch2.jpg")
 out_dir: str = "kotchakorn_inpaint"
+print(f"source_image.size: {source_image.size}")
+size_factor: float = 0.5
+width, height = source_image.size
+
+def resize_for_condition_image(input_image: Image, resolution: int):
+    input_image = input_image.convert("RGB")
+    W, H = input_image.size
+    k = float(resolution) / min(H, W)
+    H *= k
+    W *= k
+    H = int(round(H / 64.0)) * 64
+    W = int(round(W / 64.0)) * 64
+    img = input_image.resize((W, H), resample=Image.LANCZOS)
+    return img
+
 
 for item in tqdm(combined_list):
     strength, guidance_scale, eta = item
@@ -51,16 +68,19 @@ for item in tqdm(combined_list):
             result = pipe(
                 prompt=prompt,
                 negative_prompt=negative_prompt,
-                image=source_image,
-                mask_image=masked_image,
+                image=resize_for_condition_image(source_image, 1024),
+                mask_image=resize_for_condition_image(masked_image, 1024),
                 num_inference_steps=num_inference_steps,
                 strength=strength,
                 guidance_scale=guidance_scale,
                 eta=eta,
+                width=int(math.floor(width * size_factor / 8) * 8),
+                height=int(math.floor(height * size_factor / 8) * 8)
             )
             for image in result.images:
                 filename: str = f"{out_dir}/kot_inpaint_{strength}_{guidance_scale}_{eta}.png"
                 image.save(filename)
-    except Exception:
+    except Exception as err:
+        print(err)
         print(f"{out_dir}/kot_inpaint_{strength}_{guidance_scale}_{eta}.png is impossible")
         continue
