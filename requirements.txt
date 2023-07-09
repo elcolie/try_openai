@@ -167,6 +167,8 @@ importlib-metadata==6.6.0
     # via
     #   controlnet-aux
     #   diffusers
+invisible-watermark==0.2.0
+    # via -r requirements.in
 ipdb==0.13.13
     # via ploomber
 ipykernel==6.23.1
@@ -287,6 +289,7 @@ numpy==1.24.3
     #   diffusers
     #   gradio
     #   imageio
+    #   invisible-watermark
     #   matplotlib
     #   mediapipe
     #   opencv-contrib-python
@@ -309,7 +312,9 @@ opencv-contrib-python==4.7.0.72
     #   -r requirements.in
     #   mediapipe
 opencv-python==4.7.0.72
-    # via controlnet-aux
+    # via
+    #   controlnet-aux
+    #   invisible-watermark
 orjson==3.8.13
     # via gradio
 packaging==23.1
@@ -347,6 +352,7 @@ pillow==9.5.0
     #   diffusers
     #   gradio
     #   imageio
+    #   invisible-watermark
     #   matplotlib
     #   scikit-image
     #   torchvision
@@ -420,7 +426,9 @@ python-multipart==0.0.6
 pytz==2023.3
     # via pandas
 pywavelets==1.4.1
-    # via scikit-image
+    # via
+    #   invisible-watermark
+    #   scikit-image
 pyyaml==6.0
     # via
     #   accelerate
@@ -461,7 +469,9 @@ requests==2.30.0
 responses==0.18.0
     # via datasets
 safetensors==0.3.1
-    # via timm
+    # via
+    #   -r requirements.in
+    #   timm
 scikit-image==0.21.0
     # via controlnet-aux
 scipy==1.10.1
@@ -520,6 +530,7 @@ torch==2.0.1
     #   -r requirements.in
     #   accelerate
     #   controlnet-aux
+    #   invisible-watermark
     #   timm
     #   torchvision
     #   xformers

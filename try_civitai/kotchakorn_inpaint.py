@@ -1,6 +1,10 @@
 """
 https://www.facebook.com/photo/?fbid=230317606517173&set=gm.1042375796884526&idorvanity=209358916852889
 Remove bikini.
+Further prompts
+- see through
+- strip bikini
+- micro bikini
 """
 import itertools
 import math
@@ -52,7 +56,7 @@ def resize_for_condition_image(input_image: Image, resolution: int):
     return img
 
 
-for item in tqdm(combined_list):
+for item in tqdm(combined_list, total=len(combined_list)):
     strength, guidance_scale, eta = item
     strength = 0.1 * strength
     eta = 0.1 * eta
