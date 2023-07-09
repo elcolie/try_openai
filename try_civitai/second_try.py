@@ -40,7 +40,7 @@ for item in tqdm(combined_list, desc="Overall"):
             load_safety_checker=False)
 
         # https://civitai.com/models/82098/add-more-details-detail-enhancer-tweaker-lora
-        pipe = load_lora_weights(pipe, "more_details_lora.safetensors", multiplier, device)
+        pipe = load_lora_weights(pipe, "../ai_files/more_details_lora.safetensors", multiplier, device)
         pipe.to(device)
         prompt = """
         best quality, 8K, HDR, highres, blurry background, bokeh:1.3, Photography, (RAW photo:1.2, photorealistic:1.4, masterpiece:1.3, best quality:1.3, ultra highres:1.2), (((pin light, backlighting))), (depth of field), sharp focus:1.4, (camera from distance), (super_detail, hyper_detail, finely_detailed) ADDBASE blue sky ADDROW blue see ADDROW sand beach BREAK 1woman standing on sand beach, front view person. full body, ((((mature woman, solo, glamorous)))), (((gigantic breasts:0.7, narrow waist, oiledwet, large ass, thin thighs))) BREAK high detailed skin, delicate, beautiful skin, solid circle eyes, detailed beautiful face, beautiful detailed, (detailed eyes), (detailed facial features), beautiful and clear eyes, detail eye pupil, lipgloss, blush, cheek, long hair, black hair, (((expression_face, hair over one eye, beautiful fingers, beautiful hands))) BREAK bikini, earrings, necklace, sandals

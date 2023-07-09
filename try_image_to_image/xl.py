@@ -8,7 +8,7 @@ import torch
 
 device = "mps" if torch.backends.mps.is_available() else "cpu"
 print(f"Device: {device}")
-pipe = DiffusionPipeline.from_pretrained("sd_xl_base_0.9")
+pipe = DiffusionPipeline.from_pretrained("../ai_directory/sd_xl_base_0.9")
 pipe.to(device)
 
 # RuntimeError: Python 3.11+ not yet supported for torch.compile
