@@ -28,7 +28,7 @@ controlnet = ControlNetModel.from_pretrained('lllyasviel/control_v11f1e_sd15_til
 pipe = StableDiffusionControlNetPipeline.from_pretrained(
     # "runwayml/stable-diffusion-v1-5",
     # "../flat2DAnimerge",
-    "../majicmixRealistic_v6",
+    "../../ai_directory/majicmixRealistic_v6",
     custom_pipeline="stable_diffusion_controlnet_img2img",
     controlnet=controlnet,
     safety_checker=None).to(device)

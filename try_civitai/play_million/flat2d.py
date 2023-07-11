@@ -61,7 +61,7 @@ for item in tqdm(combined_list, total=len(combined_list)):
     controlnet = ControlNetModel.from_pretrained(f"lllyasviel/{control_model_name}").to(device)
 
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
-        "../flat2DAnimerge",
+        "../../ai_directory/flat2DAnimerge",
         safety_checker=None,
         controlnet=controlnet,
         local_files_only=True,

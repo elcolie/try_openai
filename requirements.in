@@ -23,3 +23,7 @@ omegaconf
 # https://huggingface.co/stabilityai/stable-diffusion-xl-base-0.9
 invisible_watermark
 safetensors
+# https://github.com/TencentARC/GFPGAN#installation
+# Improve face
+
+
