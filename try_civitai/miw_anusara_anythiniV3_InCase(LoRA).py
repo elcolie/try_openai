@@ -5,6 +5,7 @@ https://www.youtube.com/watch?v=BO4GTG1Gb-4&ab_channel=SafiiClon
 Dependencies:
 https://civitai.com/models/66/anything-v3
 https://civitai.com/models/6648/incase-style-lora
+User convert script to convert ckpt file, but do not include --safetensors
 """
 import itertools
 import os.path
