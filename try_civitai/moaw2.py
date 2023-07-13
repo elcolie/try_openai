@@ -48,7 +48,7 @@ for control_model_name in tqdm(control_nets):
     controlnet = ControlNetModel.from_pretrained(f"lllyasviel/{control_model_name}").to(device)
 
     pipe = StableDiffusionControlNetPipeline.from_pretrained(
-        "MeinaV10",
+        "../ai_directory/MeinaV10",
         safety_checker=None,
         controlnet=controlnet,
     ).to(device)

@@ -14,12 +14,12 @@ import os.path
 import random
 
 import torch.backends.mps
-from PIL import Image
 from diffusers import StableDiffusionInpaintPipeline
 from diffusers.utils import load_image
 from tqdm import tqdm
 
 from set_seed import seed_everything
+from try_civitai.set_seed import resize_for_condition_image
 
 seed: int = 88888
 seed_everything(seed)
@@ -44,18 +44,6 @@ out_dir: str = "kotchakorn_sit_stream"
 print(f"source_image.size: {source_image.size}")
 size_factor: float = 0.7
 width, height = source_image.size
-
-def resize_for_condition_image(input_image: Image, resolution: int):
-    input_image = input_image.convert("RGB")
-    W, H = input_image.size
-    k = float(resolution) / min(H, W)
-    H *= k
-    W *= k
-    H = int(round(H / 64.0)) * 64
-    W = int(round(W / 64.0)) * 64
-    img = input_image.resize((W, H), resample=Image.LANCZOS)
-    return img
-
 
 for item in tqdm(combined_list, total=len(combined_list)):
     strength, guidance_scale, eta = item
