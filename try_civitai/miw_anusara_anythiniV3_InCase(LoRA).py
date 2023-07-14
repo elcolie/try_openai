@@ -6,11 +6,13 @@ Dependencies:
 https://civitai.com/models/66/anything-v3
 https://civitai.com/models/6648/incase-style-lora
 User convert script to convert ckpt file, but do not include --safetensors
+This experiment is terminated because it seems to not work after run around 1 day.
 """
 import itertools
 import os.path
 import random
 import typing as typ
+from multiprocessing import Pool
 
 import cv2
 import numpy as np
@@ -46,7 +48,7 @@ canny_image = Image.fromarray(image)
 prompt: str = "masterpiece, best quality, ultra-detailed, illustration, (1girl), bikini, pool, half body"
 negative_prompt: str = "low quality, bad hands"
 num_images_per_prompt: int = 1
-num_inference_steps: int = 100
+num_inference_steps: int = 200
 
 lora_path: str = "../ai_files/ics_a3_lora.safetensors"
 control_nets: typ.List[str] = [
@@ -66,7 +68,9 @@ combined_list = list(itertools.product(control_nets, guidances, multipliers, mod
 # Shuffle the combined list
 random.shuffle(combined_list)
 
-for item in tqdm(combined_list, total=len(combined_list)):
+
+def run_image(item) -> None:
+    """Process the image based on given item."""
     control_net, guidance_scale, multiplier, model_id = item
     controlnet = ControlNetModel.from_pretrained(
         f"lllyasviel/{control_net}"
@@ -95,4 +99,13 @@ for item in tqdm(combined_list, total=len(combined_list)):
             print(err)
             with open(f"{out_dir}/{model_id}_{control_net}_{guidance_scale}_{multiplier}_0.txt", "a") as file:
                 file.write("Dead file")
-            continue
+
+
+def main() -> None:
+    """Run main function."""
+    with Pool(4) as p:
+        r = list(tqdm(p.imap(run_image, combined_list), total=len(combined_list)))
+
+
+if __name__ == "__main__":
+    main()
