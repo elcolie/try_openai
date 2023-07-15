@@ -11,6 +11,7 @@ Add multiple prompts
 Result: Face is distorted
 """
 import itertools
+import math
 import os
 import random
 
@@ -21,43 +22,54 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from set_seed import seed_everything
+from set_seed import seed_everything, resize_for_condition_image
 
-seed: int = 8811
+seed: int = 8888
 seed_everything(seed)
 out_dir: str = "sasithorn_bikini_beach"
-negative_prompt: str = "low resolution, blur, bad quality, distort, bad shape, skinny, turn back, bad face, distort face"
+negative_prompt: str = "low resolution, blur, bad quality, distort, bad shape, skirt, full body dress, cloth cover legs, limbs, multiple legs, bad face, blue edge"
 device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
 # init_image = init_image.resize((512, 512))
-strengths = [round(0.1 * _, 3) for _ in range(0, 11, 1)]
-guidance_scales = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-base_prompt = "4k, ultra resolution, sexy, white skin, straight face, sit cross legged, blue sky"
-additional_prompts = ["micro bikini", "strip bikini", "micro bikini", "nipple cover", "naked"]
-combined_list = list(itertools.product(
-    strengths, guidance_scales, eta_list, additional_prompts)
-)
+# strengths = [round(0.1 * _, 3) for _ in range(0, 11, 1)]
+# guidance_scales = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
+# eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
+prompt = "a naked beach girl sitting on the beach. She crosses her legs."
+# combined_list = list(itertools.product(
+#     strengths, guidance_scales, eta_list, additional_prompts)
+# )
 init_image = load_image("sources/sasithorn.jpeg")
-generator = torch.Generator(device=device).manual_seed(seed)
-mask_image = load_image("sources/masked_sasithorn.png")
+width, height = init_image.size
+# size_factor: float = 0.8
+# new_width, new_height = math.floor(width * size_factor / 8) * 8, math.floor(height * size_factor / 8) * 8
+new_width, new_height = width, height
+print(width, height)
+print(new_width, new_height)
+init_image = init_image.resize((new_width, new_height))
 
-random.shuffle(combined_list)
+generator = torch.Generator(device=device).manual_seed(seed)
+mask_image = load_image("sources/masked_sasithorn.png").resize((new_width, new_height))
+
+# random.shuffle(combined_list)
 
 def make_inpaint_condition(image, image_mask):
     image = np.array(image.convert("RGB")).astype(np.float32) / 255.0
     image_mask = np.array(image_mask.convert("L")).astype(np.float32) / 255.0
 
     assert image.shape[0:1] == image_mask.shape[0:1], "image and image_mask must have the same image size"
-    image[image_mask > 0.5] = -1  # set as masked pixel
+    image[image_mask > 0.5] = 1  # set as masked pixel
     image = np.expand_dims(image, 0).transpose(0, 3, 1, 2)
     image = torch.from_numpy(image)
     return image
 
 
-for item in tqdm(combined_list, total=len(combined_list)):
-    strength, guidance_scale, eta, add_prompt = item
+def main() -> None:
+    """Run main function."""
+    strength = 1
+    guidance_scale = 7.5
+    eta = 0
+    add_prompt = prompt
     print(strength, guidance_scale, eta, add_prompt)
     filename: str = f"{out_dir}/{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
     try:
@@ -68,30 +80,41 @@ for item in tqdm(combined_list, total=len(combined_list)):
                 "lllyasviel/control_v11p_sd15_inpaint",
             ).to(device)
             pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
-                "runwayml/stable-diffusion-v1-5", controlnet=controlnet,
+                # "runwayml/stable-diffusion-v1-5",  # Reference bad
+                "../ai_directory/majicmixRealistic_v6",  # Quite good
+                # "../ai_directory/MeinaV10",   # Anime
+                # "../ai_directory/perfectWorld_v4Baked",  # Ordinary
+                # "../ai_directory/chilloutmix_NiPrunedFp32Fix",  # It gives full bodysuit
+                controlnet=controlnet,
                 requires_safety_checker=False,
                 safety_checker=None
             ).to(device)
+            pipe.requires_safety_checker = False
+            pipe.safety_checker = None
 
             pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
 
             # generate image
             result = pipe(
-                prompt=f"{base_prompt}, {add_prompt}",
+                prompt=add_prompt,
                 negative_prompt=negative_prompt,
-                num_inference_steps=20,
+                num_inference_steps=100,
                 generator=generator,
                 image=init_image,
                 mask_image=mask_image,
                 control_image=control_image,
-                num_images_per_prompt=1,
-                strength=strength,
-                guidance_scale=guidance_scale,
-                eta=eta,
+                num_images_per_prompt=2,
+                width=new_width,
+                height=new_height
+                # strength=strength,
+                # guidance_scale=guidance_scale,
+                # eta=eta,
             )
             for idx, image in enumerate(result.images):
                 filename: str = f"{out_dir}/{add_prompt}_{strength}_{guidance_scale}_{eta}_{idx}.png"
                 image.save(filename)
+        else:
+            print("File exists.")
     except Exception as err:
         print(err)
         print(f"{filename} is impossible")
@@ -99,4 +122,7 @@ for item in tqdm(combined_list, total=len(combined_list)):
             file.write(str(err) + "\n")
             file.write(filename + "\n")
             file.write("====================================" + "\n")
-        continue
+
+
+if __name__ == "__main__":
+    main()
