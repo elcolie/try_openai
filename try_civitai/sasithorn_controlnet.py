@@ -12,6 +12,7 @@ Result: Face is distorted
 """
 import itertools
 import os
+import random
 
 # !pip install transformers accelerate
 from diffusers import StableDiffusionControlNetInpaintPipeline, ControlNetModel, DDIMScheduler
@@ -30,10 +31,10 @@ device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
 # init_image = init_image.resize((512, 512))
-strengths = [0.5, 1.0, 1.5, 2.0]
-guidance_scales = [4, 5, 6, 7, 8, 9, 10, 11, 12]
-eta_list = list(range(4, 11))
-base_prompt = "4k, ultra resolution, sexy, white skin, straight face, sit cross legged, crowded beach, blue sky"
+strengths = [round(0.1 * _, 3) for _ in range(0, 11, 1)]
+guidance_scales = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
+eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
+base_prompt = "4k, ultra resolution, sexy, white skin, straight face, sit cross legged, blue sky"
 additional_prompts = ["micro bikini", "strip bikini", "micro bikini", "nipple cover", "naked"]
 combined_list = list(itertools.product(
     strengths, guidance_scales, eta_list, additional_prompts)
@@ -41,6 +42,8 @@ combined_list = list(itertools.product(
 init_image = load_image("sources/sasithorn.jpeg")
 generator = torch.Generator(device=device).manual_seed(seed)
 mask_image = load_image("sources/masked_sasithorn.png")
+
+random.shuffle(combined_list)
 
 def make_inpaint_condition(image, image_mask):
     image = np.array(image.convert("RGB")).astype(np.float32) / 255.0
@@ -55,6 +58,7 @@ def make_inpaint_condition(image, image_mask):
 
 for item in tqdm(combined_list, total=len(combined_list)):
     strength, guidance_scale, eta, add_prompt = item
+    print(strength, guidance_scale, eta, add_prompt)
     filename: str = f"{out_dir}/{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
     try:
         if not os.path.exists(filename):
@@ -91,4 +95,8 @@ for item in tqdm(combined_list, total=len(combined_list)):
     except Exception as err:
         print(err)
         print(f"{filename} is impossible")
+        with open(f"{out_dir}/log.txt", "a") as file:
+            file.write(str(err) + "\n")
+            file.write(filename + "\n")
+            file.write("====================================" + "\n")
         continue
