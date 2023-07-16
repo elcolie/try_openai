@@ -32,17 +32,17 @@ device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
 # init_image = init_image.resize((512, 512))
-strengths = [round(0.2 * _, 3) for _ in range(1, 6, 1)]
-guidance_scales = [round(0.2 * _, 3) for _ in range(36, 51, 1)]
+strengths = [1,]
+guidance_scales = [round(0.2 * _, 3) for _ in range(36, 81, 1)]
 # eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl sitting on the beach. She crosses her legs and wearing 2 piece string bikini"
+prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl sitting on the beach bed. She crosses her legs and wearing 2 piece string bikini"
 combined_list = list(itertools.product(strengths, guidance_scales))
 random.shuffle(combined_list)
 init_image = load_image("sources/sasithorn.jpeg")
 width, height = init_image.size
-# size_factor: float = 0.8
-# new_width, new_height = math.floor(width * size_factor / 8) * 8, math.floor(height * size_factor / 8) * 8
-new_width, new_height = width, height
+size_factor: float = 0.6
+new_width, new_height = math.floor(width * size_factor / 8) * 8, math.floor(height * size_factor / 8) * 8
+# new_width, new_height = width, height
 print(width, height)
 print(new_width, new_height)
 init_image = init_image.resize((new_width, new_height))
