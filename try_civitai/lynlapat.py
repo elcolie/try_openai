@@ -1,5 +1,5 @@
 """
-https://www.facebook.com/groups/209358916852889/permalink/1046214066500699/
+https://www.facebook.com/photo/?fbid=3580351428946576&set=g.209358916852889
 Further prompts
 - see through
 - strip bikini
@@ -26,19 +26,19 @@ from set_seed import seed_everything, resize_for_condition_image
 
 seed: int = 8888
 seed_everything(seed)
-out_dir: str = "sasithorn_bikini_beach"
+out_dir: str = "lynlapat_snooker"
 negative_prompt: str = "nsfw, ng_deepnegative_v1_75t,badhandv4, (worst quality:2), (low quality:2), (normal quality:2), lowres,watermark, monochrome"
 device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
 # init_image = init_image.resize((512, 512))
 strengths = [1,]
-guidance_scales = [round(0.2 * _, 3) for _ in range(36, 81, 1)]
+guidance_scales = [round(0.2 * _, 3) for _ in range(36, 101, 1)]
 # eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl sitting on the beach bed. She crosses her legs and wearing 2 piece string bikini"
+prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl on the red snooker table."
 combined_list = list(itertools.product(strengths, guidance_scales))
 random.shuffle(combined_list)
-init_image = load_image("sources/sasithorn.jpeg")
+init_image = load_image("sources/lynlapat.jpeg")
 width, height = init_image.size
 size_factor: float = 0.8
 new_width, new_height = math.floor(width * size_factor / 8) * 8, math.floor(height * size_factor / 8) * 8
@@ -48,7 +48,7 @@ print(new_width, new_height)
 init_image = init_image.resize((new_width, new_height))
 
 generator = torch.Generator(device=device).manual_seed(seed)
-mask_image = load_image("sources/masked_sasithorn.png").resize((new_width, new_height))
+mask_image = load_image("sources/masked_lynlapat.png").resize((new_width, new_height))
 
 
 
@@ -99,12 +99,12 @@ def main() -> None:
                 result = pipe(
                     prompt=add_prompt,
                     negative_prompt=negative_prompt,
-                    num_inference_steps=30,
+                    num_inference_steps=100,
                     generator=generator,
                     image=init_image,
                     mask_image=mask_image,
                     control_image=control_image,
-                    num_images_per_prompt=2,
+                    num_images_per_prompt=1,
                     width=new_width,
                     height=new_height,
                     strength=strength,

@@ -24,12 +24,17 @@ from set_seed import seed_everything, resize_for_condition_image
 
 seed: int = 8811
 seed_everything(seed)
-device: str = "mps" if torch.backends.mps.is_available() else "cpu"
+# device: str = "mps" if torch.backends.mps.is_available() else "cpu"  # Error: total bytes of NDArray > 2**32'
+device: str = "cpu"
 print(f"Device: {device}")
 prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl sitting on the beach bed. She crosses her legs and wearing 2 piece string bikini"
 
 negative_prompt: str = "low resolution, blur, bad quality, distort, bad shape, skinny, turn back, bad face, distort face,"
 low_res_img = load_image("sasithorn_bikini_beach/s.png")
+width, height = low_res_img.size
+size_factor: float = 0.5
+new_width, new_height = math.floor(width * size_factor / 8) * 8, math.floor(height * size_factor / 8) * 8
+low_res_img = low_res_img.resize((new_width, new_height))
 out_dir: str = "sasithorn_bikini_beach"
 print(f"source_image.size: {low_res_img.size}")
 

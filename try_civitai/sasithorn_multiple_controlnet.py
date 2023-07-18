@@ -5,6 +5,7 @@ Use multiple controlNet
 2. Background
 Face distortion will be cut/paste from the original picture
 """
+import copy
 import itertools
 import random
 
@@ -63,18 +64,19 @@ def make_inpaint_condition(image, image_mask):
     image_mask = np.array(image_mask.convert("L")).astype(np.float32) / 255.0
 
     assert image.shape[0:1] == image_mask.shape[0:1], "image and image_mask must have the same image size"
-    image[image_mask > 0.5] = -1.0  # set as masked pixel
+    image[image_mask > 0.5] = -1  # set as masked pixel
     image = np.expand_dims(image, 0).transpose(0, 3, 1, 2)
     image = torch.from_numpy(image)
     return image
 
 
-base_prompt = "4k, ultra resolution, sexy, white skin, straight face, sit cross legged, blue sky"
-additional_prompts = ["swimsuit", "bikini"]
+base_prompt = "4k, ultra resolution, sexy, white skin, straight face, sit cross legged on the luxurios sofa in the office. She "
+additional_prompts = ["is wearing swimsuit", "is wearing bikini"]
 negative_prompt: str = "low resolution, blur, bad quality, distortion, bad shape, skinny, turn back, bad face, distorted face, ugly face, people, limbs"
-strengths = [0, 0.2, 0.4, 0.6, 0.8, 1.0]
-guidance_scales = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 2, 4, 6, 8, 10]
-eta_list = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.5, 2.0, 4, 6, 8, 10]
+strengths = [1, ]
+guidance_scales = [round(0.1 * _, 3) for _ in range(70, 252, 2)]
+# eta_list = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.5, 2.0, 4, 6, 8, 10]
+eta_list = [1]
 combined_list = list(itertools.product(
     strengths, guidance_scales, eta_list, additional_prompts)
 )
@@ -91,7 +93,9 @@ controlnets = [
     ).to(device),
 ]
 pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
-    "runwayml/stable-diffusion-v1-5", controlnet=controlnets,
+    # "runwayml/stable-diffusion-v1-5",
+    "../ai_directory/majicmixRealistic_v6",
+    controlnet=controlnets,
     requires_safety_checker=False,
     safety_checker=None
 ).to(device)
@@ -100,21 +104,23 @@ pipe.safety_checker = None
 pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
 
 my_images = [
+    make_inpaint_condition(init_image, mask_background_image),
     make_inpaint_condition(init_image, mask_cloth_image),
-    make_inpaint_condition(init_image, mask_background_image)
 ]
 
 for item in tqdm(combined_list, total=len(combined_list)):
     strength, guidance_scale, eta, add_prompt = item
     # generate image
     image = pipe(
-        f"{base_prompt}, {add_prompt}",
-        image=my_images,
+        f"{base_prompt} {add_prompt}",
+        image=[init_image] * 2,
+        mask_image=[mask_background_image, mask_cloth_image],
+        control_image=my_images,
         negative_prompt=negative_prompt,
-        num_inference_steps=50,
+        num_inference_steps=30,
         generator=generator,
         eta=eta,
         strength=strength,
         guidance_scale=guidance_scale,
-        controlnet_conditioning_scale=[1.0, 0.8]
-    ).images[0].save(f"{out_dir}/{strength}_{guidance_scale}_{eta}_{add_prompt}.png")
+        # controlnet_conditioning_scale=[1.0, 0.8]
+    ).images[0].save(f"{out_dir}/{strength}_{guidance_scale}_{eta}_{base_prompt}, {add_prompt}.png")
