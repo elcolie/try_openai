@@ -14,7 +14,7 @@ import itertools
 import math
 import os
 import random
-
+import diffusers
 # !pip install transformers accelerate
 from diffusers import StableDiffusionControlNetInpaintPipeline, ControlNetModel, DDIMScheduler
 from diffusers.utils import load_image
@@ -31,12 +31,21 @@ negative_prompt: str = "nsfw, ng_deepnegative_v1_75t,badhandv4, (worst quality:2
 device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
+schedulers = [
+    ("LMSDiscreteScheduler", diffusers.schedulers.scheduling_lms_discrete.LMSDiscreteScheduler),
+    ("DDIMScheduler", diffusers.schedulers.scheduling_ddim.DDIMScheduler),
+    ("DPMSolverMultistepScheduler", diffusers.schedulers.scheduling_dpmsolver_multistep.DPMSolverMultistepScheduler),
+    ("EulerDiscreteScheduler", diffusers.schedulers.scheduling_euler_discrete.EulerDiscreteScheduler),
+    ("PNDMScheduler", diffusers.schedulers.scheduling_pndm.PNDMScheduler),
+    ("DDPMScheduler", diffusers.schedulers.scheduling_ddpm.DDPMScheduler),
+    ("EulerAncestralDiscreteScheduler", diffusers.schedulers.scheduling_euler_ancestral_discrete.EulerAncestralDiscreteScheduler)
+]
 # init_image = init_image.resize((512, 512))
-strengths = [1,]
-guidance_scales = [round(0.2 * _, 3) for _ in range(36, 101, 1)]
+strengths = [1, ]
+guidance_scales = [round(0.2 * _, 3) for _ in range(50, 101, 1)]
 # eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-prompt = "best quality, masterpiece, (photorealistic:1.4), 1girl, light smile, a girl on the red snooker table."
-combined_list = list(itertools.product(strengths, guidance_scales))
+prompt = "best quality, masterpiece, photorealistic, 1girl, a girl on the casino table."
+combined_list = list(itertools.product(strengths, guidance_scales, schedulers))
 random.shuffle(combined_list)
 init_image = load_image("sources/lynlapat.jpeg")
 width, height = init_image.size
@@ -49,7 +58,6 @@ init_image = init_image.resize((new_width, new_height))
 
 generator = torch.Generator(device=device).manual_seed(seed)
 mask_image = load_image("sources/masked_lynlapat.png").resize((new_width, new_height))
-
 
 
 def make_inpaint_condition(image, image_mask):
@@ -69,10 +77,10 @@ def main() -> None:
     # guidance_scale = 7.5
     eta = 0
     for item in tqdm(combined_list):
-        strength, guidance_scale = item
+        strength, guidance_scale, (scheduler_name, scheduler) = item
         add_prompt = prompt
         print(strength, guidance_scale, eta, add_prompt)
-        filename: str = f"{out_dir}/{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
+        filename: str = f"{out_dir}/{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
         try:
             if not os.path.exists(filename):
                 control_image = make_inpaint_condition(init_image, mask_image)
@@ -85,7 +93,7 @@ def main() -> None:
                     "../ai_directory/majicmixRealistic_v6",  # Quite good
                     # "../ai_directory/MeinaV10",   # Anime
                     # "../ai_directory/perfectWorld_v4Baked",  # Ordinary
-                    # "../ai_directory/chilloutmix_NiPrunedFp32Fix",  # It gives full bodysuit
+                    # "../ai_directory/chilloutmix_NiPrunedFp32Fix",
                     controlnet=controlnet,
                     requires_safety_checker=False,
                     safety_checker=None
@@ -93,13 +101,13 @@ def main() -> None:
                 pipe.requires_safety_checker = False
                 pipe.safety_checker = None
 
-                pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
+                pipe.scheduler = scheduler.from_config(pipe.scheduler.config)
 
                 # generate image
                 result = pipe(
                     prompt=add_prompt,
                     negative_prompt=negative_prompt,
-                    num_inference_steps=100,
+                    num_inference_steps=30,
                     generator=generator,
                     image=init_image,
                     mask_image=mask_image,
@@ -112,7 +120,7 @@ def main() -> None:
                     # eta=eta,
                 )
                 for idx, image in enumerate(result.images):
-                    filename: str = f"{out_dir}/{add_prompt}_{strength}_{guidance_scale}_{eta}_{idx}.png"
+                    filename: str = f"{out_dir}/{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_{idx}.png"
                     image.save(filename)
             else:
                 print("File exists.")
