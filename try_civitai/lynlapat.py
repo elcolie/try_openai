@@ -27,7 +27,7 @@ from set_seed import seed_everything, resize_for_condition_image
 seed: int = 8888
 seed_everything(seed)
 out_dir: str = "lynlapat_snooker"
-negative_prompt: str = "nsfw, ng_deepnegative_v1_75t,badhandv4, (worst quality:2), (low quality:2), (normal quality:2), lowres,watermark, monochrome"
+negative_prompt: str = "nsfw, worst quality, low quality, normal quality, lowres,watermark, monochrome, light color, low resolution"
 device: str = "mps" if torch.backends.mps.is_available() else "cpu"
 print(device)
 
@@ -40,12 +40,20 @@ schedulers = [
     ("DDPMScheduler", diffusers.schedulers.scheduling_ddpm.DDPMScheduler),
     ("EulerAncestralDiscreteScheduler", diffusers.schedulers.scheduling_euler_ancestral_discrete.EulerAncestralDiscreteScheduler)
 ]
+models = [
+    ("stable-diffusion-v1-5", "runwayml/stable-diffusion-v1-5"),  # Reference bad
+    ("majicmixRealistic_v6", "../ai_directory/majicmixRealistic_v6"),  # Quite good
+    # ("MeinaV10", "../ai_directory/MeinaV10"),   # Anime
+    # ("perfectWorld_v4Baked", "../ai_directory/perfectWorld_v4Baked"),  # Ordinary
+    ("chilloutmix_NiPrunedFp32Fix", "../ai_directory/chilloutmix_NiPrunedFp32Fix"),
+]
 # init_image = init_image.resize((512, 512))
 strengths = [1, ]
-guidance_scales = [round(0.2 * _, 3) for _ in range(50, 101, 1)]
+# guidance_scales = [round(0.5 * _, 3) for _ in range(50, 71, 5)]
+guidance_scales = [10, 20, 30, 40]
 # eta_list = [round(0.2 * _, 3) for _ in range(0, 11, 1)]
-prompt = "best quality, masterpiece, photorealistic, 1girl, a girl on the casino table."
-combined_list = list(itertools.product(strengths, guidance_scales, schedulers))
+prompt = "best quality, highres, high definition masterpiece, photorealistic, a girl on the casino table."
+combined_list = list(itertools.product(models, strengths, guidance_scales, schedulers))
 random.shuffle(combined_list)
 init_image = load_image("sources/lynlapat.jpeg")
 width, height = init_image.size
@@ -76,11 +84,11 @@ def main() -> None:
     # strength = 1
     # guidance_scale = 7.5
     eta = 0
-    for item in tqdm(combined_list):
-        strength, guidance_scale, (scheduler_name, scheduler) = item
+    for item in tqdm(combined_list, total=len(combined_list)):
+        (model_name, model_id), strength, guidance_scale, (scheduler_name, scheduler) = item
         add_prompt = prompt
         print(strength, guidance_scale, eta, add_prompt)
-        filename: str = f"{out_dir}/{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
+        filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_0.png"
         try:
             if not os.path.exists(filename):
                 control_image = make_inpaint_condition(init_image, mask_image)
@@ -89,11 +97,7 @@ def main() -> None:
                     "lllyasviel/control_v11p_sd15_inpaint",
                 ).to(device)
                 pipe = StableDiffusionControlNetInpaintPipeline.from_pretrained(
-                    # "runwayml/stable-diffusion-v1-5",  # Reference bad
-                    "../ai_directory/majicmixRealistic_v6",  # Quite good
-                    # "../ai_directory/MeinaV10",   # Anime
-                    # "../ai_directory/perfectWorld_v4Baked",  # Ordinary
-                    # "../ai_directory/chilloutmix_NiPrunedFp32Fix",
+                    model_id,
                     controlnet=controlnet,
                     requires_safety_checker=False,
                     safety_checker=None
@@ -107,7 +111,7 @@ def main() -> None:
                 result = pipe(
                     prompt=add_prompt,
                     negative_prompt=negative_prompt,
-                    num_inference_steps=30,
+                    num_inference_steps=150,
                     generator=generator,
                     image=init_image,
                     mask_image=mask_image,
@@ -120,7 +124,7 @@ def main() -> None:
                     # eta=eta,
                 )
                 for idx, image in enumerate(result.images):
-                    filename: str = f"{out_dir}/{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_{idx}.png"
+                    filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{add_prompt}_{strength}_{guidance_scale}_{eta}_{idx}.png"
                     image.save(filename)
             else:
                 print("File exists.")
