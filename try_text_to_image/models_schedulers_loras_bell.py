@@ -21,10 +21,6 @@ from solve_77_limits import get_pipeline_embeds
 
 human_name: str = "bell"
 out_dir: str = f"{human_name}"
-device: str = "mps" if torch.backends.mps.is_available() else "cpu"
-# device: str = "cpu"  # With this LoRA it can't run with mps. It raises RuntimeError: Invalid buffer size: 58.07 GB
-print(device)
-
 seed: int = 8811
 seed_everything(seed)
 
@@ -91,11 +87,15 @@ for item in tqdm(combined_list, total=len(combined_list)):
         pipe = pipe.to(device)
         pipe = load_lora_weights_orig(pipe, lora_file, lora_multiplier, device, torch.float32)
     else:
+        device: str = "mps" if torch.backends.mps.is_available() else "cpu"
+        # device: str = "cpu"  # With this LoRA it can't run with mps. It raises RuntimeError: Invalid buffer size: 58.07 GB
+        print(f"No lora : {device}")
         pipe = pipe.to(device)
     pipe.scheduler = scheduler.from_config(pipe.scheduler.config)
 
     generator = torch.Generator(device=device).manual_seed(seed)
     prompt: str = f"{base_prompt} {add_prompt}"
+    print(device)
     prompt_embeds, negative_prompt_embeds = get_pipeline_embeds(pipe, prompt, negative_prompt, device)
 
     filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{lora_name}_{lora_multiplier}_{strength}_{guidance_scale}_{eta}_{base_prompt}_{add_prompt[:20]}.png"
