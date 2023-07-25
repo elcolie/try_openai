@@ -95,7 +95,6 @@ for item in tqdm(combined_list, total=len(combined_list)):
 
     generator = torch.Generator(device=device).manual_seed(seed)
     prompt: str = f"{base_prompt} {add_prompt}"
-    print(device)
     prompt_embeds, negative_prompt_embeds = get_pipeline_embeds(pipe, prompt, negative_prompt, device)
 
     filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{lora_name}_{lora_multiplier}_{strength}_{guidance_scale}_{eta}_{base_prompt}_{add_prompt[:20]}.png"
