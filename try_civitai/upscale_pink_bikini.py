@@ -1,4 +1,4 @@
-"""https://www.facebook.com/photo/?fbid=6685421984852380&set=gm.1052018469253592&idorvanity=209358916852889"""
+import copy
 import itertools
 import random
 import typing as typ
@@ -10,7 +10,7 @@ from diffusers.utils import load_image
 from tqdm import tqdm
 
 seed: int = 200
-strengths: typ.List[float] = [1.0]
+strengths: typ.List[float] = [0.4, 0.6, 0.8, 1.0]
 
 models = [
     ("stable-diffusion-v1-5", "runwayml/stable-diffusion-v1-5"),  # Reference bad
@@ -24,23 +24,8 @@ models = [
     ("realisticVisionV50_v50VAE", "../ai_directory/realisticVisionV50_v50VAE"),
 ]
 
-source_images = [
-    ("a",
-     "/Users/sarit/study/try_openai/try_civitai/koh/next/henmixrealV10_henmixrealV10_EulerDiscreteScheduler_None_1.0_1_30_1_a topless masculine man_(masterpiece:1.2), b.png",
-     ),
-    ("b",
-     "/Users/sarit/study/try_openai/try_civitai/koh/next/majicmixRealistic_v6_DDIMScheduler_None_1.5_1_30_1_a topless masculine man_(masterpiece:1.2), b.png",
-     ),
-    ("c",
-     "/Users/sarit/study/try_openai/try_civitai/koh/next/majicmixRealistic_v6_DPMSolverMultistepScheduler_None_0.5_1_30_1_a topless masculine man_(masterpiece:1.2), b.png",
-     ),
-    ("d",
-     "/Users/sarit/study/try_openai/try_civitai/koh/next/majicmixRealistic_v6_EulerDiscreteScheduler_None_0.5_1_30_1_a topless masculine man_(masterpiece:1.2), b.png",
-     ),
-    ("e",
-     "/Users/sarit/study/try_openai/try_civitai/koh/next/majicmixRealistic_v6_EulerDiscreteScheduler_None_1.0_1_30_1_a topless masculine man_(masterpiece:1.2), b.png",
-     )
-]
+source_image = load_image(
+    "../try_text_to_image/bell/MeinaV10_EulerDiscreteScheduler_None_1.0_1_30_1_a white girl in pink bikini at the beach_(masterpiece:1.2), b.png")
 
 
 def resize_for_condition_image(input_image: Image, resolution: int):
@@ -55,17 +40,19 @@ def resize_for_condition_image(input_image: Image, resolution: int):
     return img
 
 
+_condition_image = resize_for_condition_image(source_image, 1024)
+
+
 def controlnet_tile() -> None:
     """Controlnet approach."""
-    # device: str = "mps" if torch.backends.mps.is_available() else "cpu"
-    device: str = "cpu"
+    device: str = "mps" if torch.backends.mps.is_available() else "cpu"
     print(device)
 
-    combined_list = list(itertools.product(models, strengths, source_images))
+    combined_list = list(itertools.product(models, strengths))
     random.shuffle(combined_list)
 
     for item in tqdm(combined_list, total=len(combined_list)):
-        (model_name, model_path), strength, (image_name, source_image) = item
+        (model_name, model_path), strength = item
         controlnet = ControlNetModel.from_pretrained('lllyasviel/control_v11f1e_sd15_tile')
         pipe = DiffusionPipeline.from_pretrained(
             model_path,
@@ -74,8 +61,9 @@ def controlnet_tile() -> None:
             requires_safety_checker=False,
             safety_checker=None
         ).to(device)
-        condition_image = resize_for_condition_image(load_image(source_image), 1024)
-        image = pipe(prompt="hires, a topless man",
+
+        condition_image = copy.deepcopy(_condition_image)
+        image = pipe(prompt="hires, a girl in pink bikini at the beach best quality",
                      negative_prompt="blur, lowres, bad anatomy, bad hands, cropped, worst quality",
                      image=condition_image,
                      controlnet_conditioning_image=condition_image,
@@ -86,7 +74,7 @@ def controlnet_tile() -> None:
                      num_inference_steps=32,
                      ).images[0]
 
-        image.save(f'koh/controlnet_tile_upscale/{model_name}_{strength}_{image_name}.png')
+        image.save(f'controlnet_tile_upscale/{model_name}_{strength}.png')
 
 
 if __name__ == "__main__":
