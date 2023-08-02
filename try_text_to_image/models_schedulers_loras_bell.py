@@ -3,32 +3,29 @@ Demo txt2img to bell.
 python convert_original_stable_diffusion_to_diffusers.py --checkpoint_path ai_files/realisticVisionV50_v50VAE.safetensors --from_safetensors --dump_path ai_directory/realisticVisionV50_v50VAE
 """
 import itertools
-import math
 import os.path
 import random
 
 import diffusers
-import numpy as np
 import torch
 # !pip install transformers accelerate
 from diffusers import StableDiffusionControlNetInpaintPipeline, ControlNetModel, StableDiffusionPipeline
-from diffusers.utils import load_image
 from tqdm import tqdm
 
 from set_seed import seed_everything
 from read_lora import load_lora_weights_orig
 from solve_77_limits import get_pipeline_embeds
 
-human_name: str = "bell"
+human_name: str = "miso"
 out_dir: str = f"{human_name}"
 seed: int = 8811
 seed_everything(seed)
 
-base_prompt = "a white girl in pink bikini at the beach"
+base_prompt = "a white cyborg girl in combat suit aiming sniper rifle crawling position on the rooftop of the building"
 additional_prompts = [
     "(masterpiece:1.2), best quality,PIXIV",
 ]
-negative_prompt: str = "(low quality, worst quality:1.4),"
+negative_prompt: str = "(low quality, worst quality:1.4), bad hands, extra legs"
 strengths = [1, ]
 # guidance_scales = [round(0.1 * _, 3) for _ in range(70, 252, 2)]
 guidance_scales = [30, ]
@@ -58,11 +55,11 @@ schedulers = [
 ]
 loras = [
     (None, None),
-    ("virginie_efira_v01", "../ai_files/loras/virginie_efira_v01.safetensors"),
-    ("Night_scene_20230715120543", "../ai_files/loras/Night_scene_20230715120543.safetensors"),
-    ("Oldsaigon-v1.0", "../ai_files/loras/Oldsaigon-v1.0.safetensors"),
+    # ("virginie_efira_v01", "../ai_files/loras/virginie_efira_v01.safetensors"),
+    # ("Night_scene_20230715120543", "../ai_files/loras/Night_scene_20230715120543.safetensors"),
+    # ("Oldsaigon-v1.0", "../ai_files/loras/Oldsaigon-v1.0.safetensors"),
 ]
-lora_multipliers = [0.5, 1.0, 1.5, 2.0]
+lora_multipliers = [1]
 
 combined_list = list(itertools.product(
     models, schedulers, loras, lora_multipliers, strengths, guidance_scales, eta_list, additional_prompts)
@@ -108,6 +105,8 @@ for item in tqdm(combined_list, total=len(combined_list)):
             generator=generator,
             eta=eta,
             guidance_scale=guidance_scale,
+            width=1600,
+            height=400,
         ).images[0].save(filename)
     else:
         print(f"{filename} is exists")

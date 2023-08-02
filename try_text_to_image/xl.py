@@ -13,7 +13,7 @@ pipe.to(device)
 # RuntimeError: Python 3.11+ not yet supported for torch.compile
 # pipe.unet = torch.compile(pipe.unet, mode="reduce-overhead", fullgraph=True)
 
-prompt: str = "Give me the modern and professional look of logo with concept 'pixel deep logic'"
+prompt: str = "The beauty woman stand in the water, reflection of the lotus flowers in the water, RAW photo,(high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, photo realistic"
 negative_prompt: str = "bad shape, ugly, dirty"
 num_inference_steps: int = 100
 num_images_per_prompt: int = 4
