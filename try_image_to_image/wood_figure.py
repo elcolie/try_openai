@@ -25,6 +25,7 @@ pipe = StableDiffusionControlNetPipeline.from_pretrained(
 
 pipe.scheduler = UniPCMultistepScheduler.from_config(pipe.scheduler.config)
 
-image = pipe("chef in the kitchen full body. face looking at the camera", image, num_inference_steps=20).images[0]
+image = pipe("chef in the kitchen full body. face looking at the camera",
+             image, num_inference_steps=20, negative_prompt="malformed",).images[0]
 
 image.save('images/chef_pose_out.png')
