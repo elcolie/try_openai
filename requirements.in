@@ -25,5 +25,5 @@ invisible_watermark
 safetensors
 # https://github.com/TencentARC/GFPGAN#installation
 # Improve face
-
-
+# Object Detection YOLO
+ultralytics

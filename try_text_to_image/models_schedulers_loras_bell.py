@@ -16,12 +16,12 @@ from set_seed import seed_everything
 from read_lora import load_lora_weights_orig
 from solve_77_limits import get_pipeline_embeds
 
-human_name: str = "miso"
+human_name: str = "miso3"
 out_dir: str = f"{human_name}"
-seed: int = 8811
+seed: int = 8811555
 seed_everything(seed)
 
-base_prompt = "a white cyborg girl in combat suit aiming sniper rifle crawling position on the rooftop of the building"
+base_prompt = "1girl, skinny, abs, flat chest, small breast holding a seashell, exotic, pirate themed, chest full of gold red hair styled, in the night city"
 additional_prompts = [
     "(masterpiece:1.2), best quality,PIXIV",
 ]
@@ -55,9 +55,11 @@ schedulers = [
 ]
 loras = [
     (None, None),
-    # ("virginie_efira_v01", "../ai_files/loras/virginie_efira_v01.safetensors"),
-    # ("Night_scene_20230715120543", "../ai_files/loras/Night_scene_20230715120543.safetensors"),
-    # ("Oldsaigon-v1.0", "../ai_files/loras/Oldsaigon-v1.0.safetensors"),
+    ("virginie_efira_v01", "../ai_files/loras/virginie_efira_v01.safetensors"),
+    ("Night_scene_20230715120543", "../ai_files/loras/Night_scene_20230715120543.safetensors"),
+    ("Oldsaigon-v1.0", "../ai_files/loras/Oldsaigon-v1.0.safetensors"),
+    ("hayakawanagisa_lora-06", "../ai_files/loras/hayakawanagisa_lora-06.safetensors"),
+    ("nayeonlorashy", "../ai_files/loras/nayeonlorashy.safetensors"),
 ]
 lora_multipliers = [1]
 
@@ -70,43 +72,54 @@ random.shuffle(combined_list)
 
 for item in tqdm(combined_list, total=len(combined_list)):
     (model_name, model_dir), (scheduler_name, scheduler), (lora_name, lora_file), lora_multiplier, strength, guidance_scale, eta, add_prompt = item
-    pipe = StableDiffusionPipeline.from_pretrained(
-        model_dir,
-        requires_safety_checker=False,
-        safety_checker=None
-    )
-    pipe.requires_safety_check = False
-    pipe.safety_checker = None
-    if lora_name != None:
-        # TypeError: Trying to convert BFloat16 to the MPS backend, but it does not have support for that dtype.
-        device: str = "cpu"
-        print(f"{lora_name} : {device}")
-        pipe = pipe.to(device)
-        pipe = load_lora_weights_orig(pipe, lora_file, lora_multiplier, device, torch.float32)
-    else:
-        device: str = "mps" if torch.backends.mps.is_available() else "cpu"
-        # device: str = "cpu"  # With this LoRA it can't run with mps. It raises RuntimeError: Invalid buffer size: 58.07 GB
-        print(f"No lora : {device}")
-        pipe = pipe.to(device)
-    pipe.scheduler = scheduler.from_config(pipe.scheduler.config)
-
-    generator = torch.Generator(device=device).manual_seed(seed)
-    prompt: str = f"{base_prompt} {add_prompt}"
-    prompt_embeds, negative_prompt_embeds = get_pipeline_embeds(pipe, prompt, negative_prompt, device)
-
-    filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{lora_name}_{lora_multiplier}_{strength}_{guidance_scale}_{eta}_{base_prompt}_{add_prompt[:20]}.png"
+    filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{lora_name}_{lora_multiplier}_{strength}_{guidance_scale}_{eta}_{base_prompt}_{add_prompt[:20]}.png".replace(
+        " ", "_")
     print(f"{filename} is running")
     if not os.path.exists(filename):
+        pipe = StableDiffusionPipeline.from_pretrained(
+            model_dir,
+            requires_safety_checker=False,
+            safety_checker=None
+        )
+        pipe.requires_safety_check = False
+        pipe.safety_checker = None
+        if lora_name != None:
+            # TypeError: Trying to convert BFloat16 to the MPS backend, but it does not have support for that dtype.
+            device: str = "cpu"
+            print(f"{lora_name} : {device}")
+            pipe = pipe.to(device)
+            pipe = load_lora_weights_orig(pipe, lora_file, lora_multiplier, device, torch.float32)
+        else:
+            device: str = "mps" if torch.backends.mps.is_available() else "cpu"
+            # device: str = "cpu"  # With this LoRA it can't run with mps. It raises RuntimeError: Invalid buffer size: 58.07 GB
+            print(f"No lora : {device}")
+            pipe = pipe.to(device)
+        pipe.scheduler = scheduler.from_config(pipe.scheduler.config)
+
+        generator = torch.Generator(device=device).manual_seed(seed)
+        prompt: str = f"{base_prompt} {add_prompt}"
+        prompt_embeds, negative_prompt_embeds = get_pipeline_embeds(pipe, prompt, negative_prompt, device)
+
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+
         # generate image
         image = pipe(
             prompt_embeds=prompt_embeds,
             negative_prompt_embeds=negative_prompt_embeds,
-            num_inference_steps=500,
+            num_inference_steps=50,
             generator=generator,
             eta=eta,
             guidance_scale=guidance_scale,
-            width=1600,
-            height=400,
-        ).images[0].save(filename)
+            width=1024,
+            height=1024,
+        ).images[0]
+        try:
+            image.save(filename)
+        except OSError as exc:
+            if exc.errno == 36:
+                filename: str = f"{out_dir}/{model_name}_{scheduler_name}_{lora_name}_{lora_multiplier}_{strength}_{guidance_scale}_{eta}_{base_prompt[:20]}_{add_prompt[:20]}.png".replace(
+                    " ", "_")
+                image.save(filename)
     else:
         print(f"{filename} is exists")

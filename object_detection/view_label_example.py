@@ -1,17 +1,27 @@
-# Setup
-Also use the files from https://github.com/pytorch/vision/tree/main/references/detection
-https://discuss.pytorch.org/t/transforms-helper-function-has-no-attribute-totensor/153985/3
-[transforms.py](transforms.py) -> Use v0.8.2
-[tv-training-code.py](tv-training-code.py)
-[utils.py](utils.py)
-[coco_eval.py](coco_eval.py)
-[coco_utils.py](coco_utils.py)
-[engine.py](engine.py)
+from small_utils import PennFudanDataset, get_transform
+from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
 
-# To view the label of dataset
-It is 0, 1, 2, ... then when view in image viewer will be black and human eyes can't distinguish.
+train_dataset = PennFudanDataset("PennFudanPed", get_transform(train=True))
 
-```python
+data, target = train_dataset[0]
+
+tensor_np = data.numpy()
+
+plt.imshow(tensor_np.transpose(1, 2, 0))  # Transpose to (H, W, C) order
+plt.axis('off')  # Turn off axis labels and ticks
+plt.show()
+
+mask_img = Image.open("PennFudanPed/PedMasks/FudanPed00001_mask.png").convert("RGB")
+
+_mask = np.array(mask_img)
+
+np.unique(_mask)
+
+_mask
+
+# +
 from PIL import Image
 import numpy as np
 
@@ -41,4 +51,7 @@ for i in range(mask_array.shape[0]):
 
 # Display the colored mask image
 colored_mask.show()
-```
+
+# -
+
+

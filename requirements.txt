@@ -229,6 +229,8 @@ matplotlib==3.7.1
     # via
     #   gradio
     #   mediapipe
+    #   seaborn
+    #   ultralytics
 matplotlib-inline==0.1.6
     # via
     #   ipykernel
@@ -299,9 +301,11 @@ numpy==1.24.3
     #   pywavelets
     #   scikit-image
     #   scipy
+    #   seaborn
     #   tifffile
     #   torchvision
     #   transformers
+    #   ultralytics
     #   xformers
 omegaconf==2.3.0
     # via -r requirements.in
@@ -315,6 +319,7 @@ opencv-python==4.7.0.72
     # via
     #   controlnet-aux
     #   invisible-watermark
+    #   ultralytics
 orjson==3.8.13
     # via gradio
 packaging==23.1
@@ -333,6 +338,8 @@ pandas==2.0.1
     #   altair
     #   datasets
     #   gradio
+    #   seaborn
+    #   ultralytics
 pandocfilters==1.5.0
     # via nbconvert
 papermill==2.4.0
@@ -356,6 +363,7 @@ pillow==9.5.0
     #   matplotlib
     #   scikit-image
     #   torchvision
+    #   ultralytics
 platformdirs==3.5.1
     # via jupyter-core
 ploomber==0.22.3
@@ -380,10 +388,13 @@ psutil==5.9.5
     # via
     #   accelerate
     #   ipykernel
+    #   ultralytics
 ptyprocess==0.7.0
     # via pexpect
 pure-eval==0.2.2
     # via stack-data
+py-cpuinfo==9.0.0
+    # via ultralytics
 pyarrow==12.0.0
     # via datasets
 pycodestyle==2.10.0
@@ -442,6 +453,7 @@ pyyaml==6.0
     #   ploomber-core
     #   timm
     #   transformers
+    #   ultralytics
 pyzmq==25.0.2
     # via
     #   ipykernel
@@ -466,6 +478,7 @@ requests==2.30.0
     #   tiktoken
     #   torchvision
     #   transformers
+    #   ultralytics
 responses==0.18.0
     # via datasets
 safetensors==0.3.1
@@ -478,6 +491,9 @@ scipy==1.10.1
     # via
     #   controlnet-aux
     #   scikit-image
+    #   ultralytics
+seaborn==0.12.2
+    # via ultralytics
 semantic-version==2.10.0
     # via gradio
 six==1.16.0
@@ -533,12 +549,14 @@ torch==2.0.1
     #   invisible-watermark
     #   timm
     #   torchvision
+    #   ultralytics
     #   xformers
 torchvision==0.15.2
     # via
     #   -r requirements.in
     #   controlnet-aux
     #   timm
+    #   ultralytics
 tornado==6.3.2
     # via
     #   ipykernel
@@ -552,6 +570,7 @@ tqdm==4.65.0
     #   ploomber
     #   ploomber-engine
     #   transformers
+    #   ultralytics
 traitlets==5.9.0
     # via
     #   comm
@@ -581,6 +600,8 @@ tzdata==2023.3
     # via pandas
 uc-micro-py==1.0.2
     # via linkify-it-py
+ultralytics==8.0.152
+    # via -r requirements.in
 urllib3==2.0.2
     # via
     #   requests
