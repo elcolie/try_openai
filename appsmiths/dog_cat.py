@@ -10,8 +10,8 @@ def main() -> None:
     """Run main function."""
     # Load a model
     model = YOLO("yolov8n.yaml")  # build a new model from scratch
-    model.train(data="coco.yaml", epochs=5, device="mps")
-    metrics = model.val(data="coco.yaml", device="mps")
+    model.train(data="config.yaml", epochs=500, device="mps")
+    metrics = model.val(data="config.yaml", device="mps")
     print(metrics)
 
 

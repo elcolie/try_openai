@@ -255,6 +255,8 @@ for item in tqdm(combined_list, total=len(combined_list)):
     prompt: str = f"{base}, {desc}"
     filename: str = f"{out_dir}/{base}_{desc}_{model_name}_{guess_mode}.png"
     if desc is not None:
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
         if not os.path.exists(filename):
             print(filename)
             controlnet = ControlNetModel.from_pretrained("lllyasviel/control_v11p_sd15_canny").to(device)

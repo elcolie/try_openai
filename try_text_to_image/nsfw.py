@@ -1,7 +1,4 @@
-"""
-Demo txt2img to bell.
-python convert_original_stable_diffusion_to_diffusers.py --checkpoint_path ai_files/realisticVisionV50_v50VAE.safetensors --from_safetensors --dump_path ai_directory/realisticVisionV50_v50VAE
-"""
+"""https://prompthero.com/prompt/7039b815da9"""
 import itertools
 import os.path
 import random
@@ -16,16 +13,16 @@ from set_seed import seed_everything
 from read_lora import load_lora_weights_orig
 from solve_77_limits import get_pipeline_embeds
 
-human_name: str = "DarioNSFWork"
+human_name: str = "Heico_NSFW"
 out_dir: str = f"{human_name}"
 seed: int = 8811555
 seed_everything(seed)
 
 base_prompt = ""
 additional_prompts = [
-    "a natural saggy gigantic breasted girl taking a shower, nude, naked, Glamor Shot, Golden Hour, DSLR, Fisheye Lens, F/2. 8, Lens Flare, 5D, 16k, Super-Resolution, AR, Evil, Feng Shui, Visual Perception, Floodlight, Crepuscular Rays, Rays of Shimmering Light, Argon Lamp, Moody Lighting, Glossy, Refractive, Iridescent, Squishy, Water, Starburst",
+    "photograph of a ((((Russian)))) woman, standing on the beach at ((sunset)), stunning environment, ((intricate)), ((highly detailed)), depth of field, ((((professionally color graded)))), Nikon D850, 85mm, f/1. 8, ((soft diffused lighting))",
 ]
-negative_prompt: str = "flash, muscular, chunky, ((3D)) render anime, cartoon, (asian) huge fake tits, child, childish, EasyNegative (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, (mutated hands and fingers:1.4), disconnected limbs, mutation, mutated, ugly, disgusting, blurry, amputation, sfw, censored, censorship, ((doggystyle)), (worst quality, low quality:1.4), easynegative"
+negative_prompt: str = "((bad framing)), ((out of frame)), black and white, grayscale, collage, cropped head, out of frame, gold interior, gold furniture, blurry, deformed, cripple, ugly, additional arms, additional legs, additional head, two heads, multiple people, group of people, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, bad anatomy, bad proportions, extra limbs, disfigured, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers"
 strengths = [1, ]
 # guidance_scales = [round(0.1 * _, 3) for _ in range(70, 252, 2)]
 guidance_scales = [30, ]
@@ -107,7 +104,7 @@ for item in tqdm(combined_list, total=len(combined_list)):
         image = pipe(
             prompt_embeds=prompt_embeds,
             negative_prompt_embeds=negative_prompt_embeds,
-            num_inference_steps=50,
+            num_inference_steps=150,
             generator=generator,
             eta=eta,
             guidance_scale=guidance_scale,
