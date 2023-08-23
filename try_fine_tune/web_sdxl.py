@@ -25,11 +25,11 @@ def seed_everything(seed: int):
 
 def generate_image_interface(prompt: str) -> object:
     """Generate image from prompt."""
-    model_path = "sdxl-sarit"
+    model_path = "fine_tuned_models/sdxl-sarit"
     device = "mps" if torch.backends.mps.is_available() else "cpu"
     pipe = StableDiffusionXLPipeline.from_pretrained(model_path, safety_checker=None, requires_safety_checker=False)
     pipe.to(device)
-    images = pipe(prompt=prompt, num_images_per_prompt=3).images
+    images = pipe(prompt=prompt, num_images_per_prompt=3, width=768, height=1024).images
     # for idx,img in enumerate(images):
     #     img.save(f"{idx}.png")
     return images
