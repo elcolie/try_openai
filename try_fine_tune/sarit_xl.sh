@@ -15,4 +15,4 @@ accelerate launch train_text_to_image_sdxl.py \
   --max_train_steps=1000 \
   --learning_rate=1e-06 --lr_scheduler="constant" --lr_warmup_steps=0 \
   --checkpointing_steps=50 \
-  --output_dir="fine_tuned_models/sdxl-sarit"
+  --output_dir="fine_tuned_models/sdxl-sarit1"
